@@ -10,7 +10,7 @@ public class User {
     private String username;
     private String password;
 
-    private static ArrayList<User> masterList = new ArrayList<>();
+    private static ArrayList<User> masterList = new ArrayList<User>();
 
     public User(String username, String password) {
         this.password = password;
@@ -25,6 +25,10 @@ public class User {
             }
         }
         return false;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return masterList;
     }
 
 }

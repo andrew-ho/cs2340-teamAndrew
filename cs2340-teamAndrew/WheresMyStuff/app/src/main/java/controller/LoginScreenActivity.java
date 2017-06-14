@@ -143,7 +143,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         }
     }
     //TODO: IMPLEMENT RESGISTRATION SCREEN
-    
+
     private void attemptRegistration() {
 
     }

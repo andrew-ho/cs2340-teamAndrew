@@ -326,7 +326,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                 return false;
             }
 
-            return User.validate(mEmail,mPassword);
+            return User.validate(mEmail, mPassword);
         }
 
         @Override

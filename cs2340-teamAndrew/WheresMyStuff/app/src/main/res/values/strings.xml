@@ -16,4 +16,5 @@
     <string name="action_register">Register</string>
     <string name="unfinishedPlaceholder">Welcome to The Unfinished App!</string>
     <string name="LogoutButton">Logout</string>
+    <string name="title_activity_application">ApplicationActivity</string>
 </resources>

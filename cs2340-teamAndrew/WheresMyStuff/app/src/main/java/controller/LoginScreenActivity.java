@@ -5,6 +5,7 @@ import model.User;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -77,6 +78,14 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                     return true;
                 }
                 return false;
+            }
+        });
+
+        Button mExitButton = (Button) findViewById(R.id.ExitApp);
+        mExitButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -335,6 +344,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             showProgress(false);
 
             if (success) {
+                Intent intent = new Intent(getBaseContext(), ApplicationActivity.class);
+                startActivity(intent);
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -1,5 +1,6 @@
 package controller;
 
+import model.FileSave;
 import model.User;
 
 import android.animation.Animator;
@@ -32,7 +33,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,10 +71,11 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
+        getUsers();
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -141,6 +146,15 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         return false;
     }
 
+    private void getUsers() {
+        try {
+            User.loadUsers(getApplicationContext());
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "file not found", Toast.LENGTH_LONG).show();
+            mEmailView.setError("Couldn't find file");
+            mEmailView.requestFocus();
+        }
+    }
     /**
      * Callback received when a permissions request has been completed.
      */
@@ -156,9 +170,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     //TODO: IMPLEMENT RESGISTRATION SCREEN
 
     private void attemptRegistration() {
-
+        User user = new User(mEmailView.getText().toString(), mPasswordView.getText().toString());
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -348,6 +361,20 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             if (success) {
                 Intent intent = new Intent(getBaseContext(), ApplicationActivity.class);
                 startActivity(intent);
+
+                try {
+                    FileSave.fileSave(getApplicationContext());
+                    Toast.makeText(getApplicationContext(), "Saved file", Toast.LENGTH_LONG).show();
+                } catch (FileNotFoundException e){
+                    Toast.makeText(getApplicationContext(), "Did not find file", Toast.LENGTH_LONG).show();
+                    mPasswordView.setError("Couldn't save file");
+                    mPasswordView.requestFocus();
+                } catch (IOException e) {
+                    mPasswordView.setError("Couldn't save file");
+                    mPasswordView.requestFocus();
+                }
+                Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
+                //finish();
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

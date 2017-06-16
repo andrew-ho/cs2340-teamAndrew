@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class FileSave {
 
-    public static void loadUsers() throws FileNotFoundException {
+    public static void fileSave() throws FileNotFoundException {
         ArrayList<User> loadUsers = User.getUsers();
         PrintWriter pw = new PrintWriter("Users.txt");
         for (User user: loadUsers) {

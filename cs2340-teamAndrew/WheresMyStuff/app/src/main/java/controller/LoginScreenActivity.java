@@ -170,7 +170,9 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     //TODO: IMPLEMENT RESGISTRATION SCREEN
 
     private void attemptRegistration() {
-        User user = new User(mEmailView.getText().toString(), mPasswordView.getText().toString());
+        Intent intent = new Intent(getApplicationContext(), RegisterScreenActivity.class);
+        startActivity(intent);
+        //User user = new User(mEmailView.getText().toString(), mPasswordView.getText().toString());
     }
 
     /**

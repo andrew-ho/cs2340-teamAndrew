@@ -27,6 +27,7 @@
             android:name="controller.ApplicationActivity"
             android:label="@string/title_activity_application"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="controller.RegisterScreenActivity" ></activity>
     </application>
 
 </manifest>

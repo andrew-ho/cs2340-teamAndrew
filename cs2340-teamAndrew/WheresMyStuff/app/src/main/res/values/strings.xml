@@ -19,4 +19,10 @@
     <string name="title_activity_application">ApplicationActivity</string>
     <string name="lost_item_title">Lost items</string>
     <string name="exit_app_message">Close</string>
+    <string name="title_activity_lost_items">LostItems</string>
+    <string name="title_activity_add_item">Add a Item</string>
+    <string name="item_name_field">Name of Item</string>
+    <string name="item_description_field" >Description of Item</string>
+    <string name="list_item_button" >List Item as Missing</string>
+    <string name="cancel_item_list">Cancel</string>
 </resources>

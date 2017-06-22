@@ -1,6 +1,7 @@
 package controller;
 
 import model.FileSave;
+import model.LostItems;
 import model.User;
 
 import android.animation.Animator;
@@ -71,6 +72,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        LostItems dummy = new LostItems("test","testItem");
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -363,12 +366,12 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(getBaseContext(), ApplicationActivity.class);
+                Intent intent = new Intent(getBaseContext(), LostItemsActivity.class);
                 startActivity(intent);
 
                 try {
                     FileSave.fileSave(getApplicationContext());
-                    Toast.makeText(getApplicationContext(), "Saved file", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Saved file", Toast.LENGTH_LONG).show();
                 } catch (FileNotFoundException e){
                     Toast.makeText(getApplicationContext(), "Did not find file", Toast.LENGTH_LONG).show();
                     mPasswordView.setError("Couldn't save file");

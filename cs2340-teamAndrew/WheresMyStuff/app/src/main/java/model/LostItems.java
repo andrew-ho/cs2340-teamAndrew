@@ -1,5 +1,6 @@
 package model;
 
+import android.media.Image;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -14,15 +15,35 @@ public class LostItems {
     private static ArrayList<LostItems> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
+    private String name;
+    private ImageView defaultImage;
 
-
-    public LostItems(String description) {
-        this(description, null);
+    public String getName() {
+        return name;
     }
 
-    public LostItems(String description, ImageView image) {
+    public ImageView getPicture(){
+        return picture;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public LostItems(String name, String description){
+        this(name,description,null);
+    }
+
+    public LostItems(String name, String description, ImageView image) {
+        this.name = name;
         this.description = description;
         this.picture = image;
+        masterItemList.add(this);
+    }
+
+    public static ArrayList<LostItems> getItems() {
+        return masterItemList;
     }
 
 }

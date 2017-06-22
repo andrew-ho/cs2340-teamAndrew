@@ -33,12 +33,12 @@ public class User {
         masterList.add(this);
     }
 
-    public void addLostItem(String description, ImageView image) {
-        myLostItems.add(new LostItems(description,image));
+    public void addLostItem(String name, String description, ImageView image) {
+        myLostItems.add(new LostItems(name,description,image));
     }
 
-    public void addLostItem(String description) {
-        myLostItems.add(new LostItems(description));
+    public void addLostItem(String name, String description) {
+        myLostItems.add(new LostItems(name, description));
     }
 
     public static void loadUsers(Context c) throws IOException {

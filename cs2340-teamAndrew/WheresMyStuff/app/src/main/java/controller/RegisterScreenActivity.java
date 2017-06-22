@@ -39,6 +39,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -137,8 +138,8 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         }
 
         //Check if email is already registered
-        if (!User.validate(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+        if (User.validate(email)) {
+            mEmailView.setError("already exists");
         }
 
 
@@ -148,7 +149,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+            mEmailView.setError("doesnt contain @");
 
             focusView = mEmailView;
             cancel = true;
@@ -160,6 +161,9 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             focusView.requestFocus();
         } else {
             //TODO: execute the registration and store data
+            User newUser = new User(email, password, "User");
+            Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 

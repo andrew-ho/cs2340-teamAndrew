@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
-import controller.LoginScreenActivity;
 
 /**
  * Created by andre on 6/14/2017.

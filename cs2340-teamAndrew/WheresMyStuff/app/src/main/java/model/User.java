@@ -1,6 +1,7 @@
 package model;
 
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -23,12 +24,21 @@ public class User {
     private String type;
 
     private static ArrayList<User> masterList = new ArrayList<User>();
+    private ArrayList<LostItems> myLostItems = new ArrayList<>();
 
     public User(String username, String password, String type) {
         this.password = password;
         this.username = username;
         this.type = type;
         masterList.add(this);
+    }
+
+    public void addLostItem(String description, ImageView image) {
+        myLostItems.add(new LostItems(description,image));
+    }
+
+    public void addLostItem(String description) {
+        myLostItems.add(new LostItems(description));
     }
 
     public static void loadUsers(Context c) throws IOException {

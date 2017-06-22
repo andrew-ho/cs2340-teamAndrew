@@ -54,7 +54,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    private User dummy = new User("test@test.com","password");
+    private User dummy = new User("test@test.com","password", "User");
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -147,6 +147,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     }
 
     private void getUsers() {
+    /*
         try {
             User.loadUsers(getApplicationContext());
         } catch (IOException e) {
@@ -154,6 +155,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             mEmailView.setError("Couldn't find file");
             mEmailView.requestFocus();
         }
+    */
     }
     /**
      * Callback received when a permissions request has been completed.

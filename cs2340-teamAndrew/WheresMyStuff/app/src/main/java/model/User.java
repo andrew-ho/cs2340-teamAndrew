@@ -21,12 +21,14 @@ import controller.LoginScreenActivity;
 public class User {
     private String username;
     private String password;
+    private String type;
 
     private static ArrayList<User> masterList = new ArrayList<User>();
 
-    public User(String username, String password) {
+    public User(String username, String password, String type) {
         this.password = password;
         this.username = username;
+        this.type = type;
         masterList.add(this);
     }
 
@@ -45,7 +47,7 @@ public class User {
         InputStreamReader isr = new InputStreamReader(fis);
         Scanner scan = new Scanner(isr);
         while (scan.hasNext()) {
-            User user = new User(scan.next(), scan.next());
+            User user = new User(scan.next(), scan.next(), scan.next());
         }
 
     }
@@ -73,7 +75,7 @@ public class User {
     }
 
     public String toString() {
-        return username + " " + password;
+        return username + " " + password + " " + type;
     }
 
 }

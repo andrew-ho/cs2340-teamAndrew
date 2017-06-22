@@ -39,7 +39,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -152,11 +151,6 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             mEmailView.setError(getString(R.string.error_invalid_email));
 
             focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (!mSelectAdmin || !mSelectUser) {
-            Toast.makeText(this, "Must select Account Type", Toast.LENGTH_LONG).show();
             cancel = true;
         }
 

@@ -1,5 +1,6 @@
 package controller;
 
+import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +62,9 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    private boolean mSelectUser;
+    private boolean mSelectAdmin;
 
     @SuppressLint("NewApi")
     @Override
@@ -95,12 +100,83 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptRegistration();
+                attemptRegistration();
             }
         });
 
+        RadioButton mUserButton = (RadioButton) findViewById(R.id.User);
+        mUserButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectUser = true;
+            }
+        });
+
+        RadioButton mAdminButton = (RadioButton) findViewById(R.id.Admin);
+        mAdminButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSelectAdmin = true;
+            }
+        });
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void attemptRegistration() {
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        //Check if email is already registered
+        if (!User.validate(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+        }
+
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (!mSelectAdmin || !mSelectUser) {
+            Toast.makeText(this, "Must select Account Type", Toast.LENGTH_LONG).show();
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            //TODO: execute the registration and store data
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
     }
 
     @Override

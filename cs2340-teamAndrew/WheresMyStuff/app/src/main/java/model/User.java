@@ -59,6 +59,15 @@ public class User {
         return false;
     }
 
+    public static boolean validate(String username) {
+        for (User user: masterList) {
+            if (user.username.equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<User> getUsers() {
         return masterList;
     }

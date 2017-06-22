@@ -17,5 +17,6 @@
     <string name="unfinishedPlaceholder">Welcome to The Unfinished App!</string>
     <string name="LogoutButton">Logout</string>
     <string name="title_activity_application">ApplicationActivity</string>
+    <string name="lost_item_title">Lost items</string>
     <string name="exit_app_message">Close</string>
 </resources>

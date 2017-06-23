@@ -63,9 +63,9 @@
                 <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checkedButton="@+id/rb_female"
-                    android:orientation="horizontal"
-                    android:layout_weight="0.20">
+                    android:layout_weight="0.20"
+                    android:checkedButton="@+id/User"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/User"

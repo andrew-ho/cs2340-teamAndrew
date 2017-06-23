@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "522804422957",
+    "firebase_url": "https://wheres-my-stuff-fb0d7.firebaseio.com",
+    "project_id": "wheres-my-stuff-fb0d7",
+    "storage_bucket": "wheres-my-stuff-fb0d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522804422957:android:45a4cd96bc7d811d",
+        "android_client_info": {
+          "package_name": "cs2340.Wheresmystuff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522804422957-15oh0ee4nofn05g5iolhuhba650mnskn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxxoBuhkDMH9E_IySicIagRc9gbhoEJYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

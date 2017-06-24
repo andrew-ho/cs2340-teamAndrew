@@ -163,6 +163,18 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             //TODO: execute the registration and store data
             User newUser = new User(email, password, "User");
             Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_LONG).show();
+            try {
+                FileSave.fileSave(getApplicationContext());
+                //Toast.makeText(getApplicationContext(), "Saved file", Toast.LENGTH_LONG).show();
+            } catch (FileNotFoundException e){
+                Toast.makeText(getApplicationContext(), "Did not find file", Toast.LENGTH_LONG).show();
+                mPasswordView.setError("Couldn't save file");
+                mPasswordView.requestFocus();
+            } catch (IOException e) {
+                mPasswordView.setError("Couldn't save file");
+                mPasswordView.requestFocus();
+            }
+            //Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
             finish();
         }
     }

@@ -369,7 +369,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                 Intent intent = new Intent(getBaseContext(), LostItemsActivity.class);
                 startActivity(intent);
 
-                try {
+                /*try {
                     FileSave.fileSave(getApplicationContext());
                     //Toast.makeText(getApplicationContext(), "Saved file", Toast.LENGTH_LONG).show();
                 } catch (FileNotFoundException e){
@@ -381,7 +381,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                     mPasswordView.requestFocus();
                 }
                 Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
-                //finish();
+                //finish();*/
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

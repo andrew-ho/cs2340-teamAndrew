@@ -30,6 +30,17 @@ public class LostItems {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LostItems(){
+
+    }
 
     public LostItems(String name, String description){
         this(name,description,null);

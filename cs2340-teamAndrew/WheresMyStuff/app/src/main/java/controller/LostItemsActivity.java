@@ -3,6 +3,7 @@ package controller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.LostItems;
 
@@ -25,8 +34,11 @@ public class LostItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
     private ListView lostList;
-    private ArrayList<LostItems> daList = LostItems.getItems();
+    //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private FloatingActionButton logout;
+    private ArrayList<String> showitems = new ArrayList<String>();
+
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
     class ItemAdapter extends ArrayAdapter<LostItems> {
         ItemAdapter(Context context, ArrayList<LostItems> list) {
@@ -49,6 +61,25 @@ public class LostItemsActivity extends AppCompatActivity {
         }
     }
 
+    private void showItems(DataSnapshot dataSnapshot) {
+        showitems.clear();
+        for (DataSnapshot data: dataSnapshot.getChildren()) {
+            LostItems item = new LostItems();
+            item.setName(data.getValue(LostItems.class).getName());
+            item.setDescription(data.getValue(LostItems.class).getDescription());
+
+            //Toast.makeText(getApplicationContext(), item.getName() + " " + item.getDescription(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), data.getValue(LostItems.class).getName(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), data.getValue().toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), data.child(data.getKey()).getValue().toString(), Toast.LENGTH_LONG).show();
+
+            //ArrayList<String> showitems = new ArrayList<String>();
+            showitems.add(item.getName() + ": " + item.getDescription());
+        }
+        lostList = (ListView) findViewById(R.id.LostItemList);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, showitems);
+        lostList.setAdapter(adapter);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +102,25 @@ public class LostItemsActivity extends AppCompatActivity {
             }
         });
 
-        lostList = (ListView) findViewById(R.id.LostItemList);
-        ItemAdapter adapaBoi = new ItemAdapter(this,daList);
-        lostList.setAdapter(adapaBoi);
+
+        ValueEventListener listener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showItems(dataSnapshot);
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                System.out.println(databaseError.toException());
+                // ...
+            }
+        };
+        ref.addValueEventListener(listener);
+
+        //ItemAdapter adapter = new ItemAdapter(this, daList);
+        //lostList = (ListView) findViewById(R.id.LostItemList);
+        //lostList.setAdapter(adapter);
+        //ListView listView = (ListView) findViewById(R.id.yourOwnListView);
+        //listView.setAdapter(adapter);
 
     }
 

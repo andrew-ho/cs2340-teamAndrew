@@ -36,6 +36,58 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522804422957:android:4a6cb89fe566d057",
+        "android_client_info": {
+          "package_name": "cs2340teamandrew.wheresmystuff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522804422957-f1o6rr9av2bffu1lh57qprvquqpg9h8j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cs2340teamandrew.wheresmystuff",
+            "certificate_hash": "ee55a5870ad61c815060de61ce4ed5b743235163"
+          }
+        },
+        {
+          "client_id": "522804422957-cjmatvqr2c9iltouubodhaa16kgsgol2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cs2340teamandrew.wheresmystuff",
+            "certificate_hash": "97ee75393d336d7a4d1b80cc00d4faf24d7e479d"
+          }
+        },
+        {
+          "client_id": "522804422957-15oh0ee4nofn05g5iolhuhba650mnskn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxxoBuhkDMH9E_IySicIagRc9gbhoEJYU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522804422957-15oh0ee4nofn05g5iolhuhba650mnskn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

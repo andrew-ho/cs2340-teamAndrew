@@ -30,6 +30,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +52,9 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText mDescription;
     private Button mCancel;
     private Button mAdd;
+
+    private DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class AddItemActivity extends AppCompatActivity {
                 final String name = mName.getText().toString();
                 final Editable description = mDescription.getText();
                 LostItems item = new LostItems(name,description.toString());
+                mMyRef.child("Lostitems").push().setValue(item);
                 finish();
             }
         });

@@ -30,7 +30,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="controller.AddItemActivity"
-            android:label="@string/title_activity_add_item"></activity>
+            android:label="@string/title_activity_add_item" />
+        <activity
+            android:name="controller.HomePageActivity"
+            android:label="@string/title_activity_home_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

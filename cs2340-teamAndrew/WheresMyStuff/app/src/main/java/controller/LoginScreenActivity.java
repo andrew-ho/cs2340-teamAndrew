@@ -79,7 +79,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getBaseContext(), LostItemsActivity.class);
+                            Intent intent = new Intent(getBaseContext(), HomePageActivity.class);
                             startActivity(intent);
 
                         } else {

@@ -2,6 +2,7 @@ package controller;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -47,6 +48,8 @@ public class LostItemsActivity extends AppCompatActivity {
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference foundRef;
+
 
     class ItemAdapter extends ArrayAdapter<LostItems> {
         ItemAdapter(Context context, ArrayList<LostItems> list) {
@@ -97,7 +100,7 @@ public class LostItemsActivity extends AppCompatActivity {
         //get user data
         //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
-
+        foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
         //sets listview
         lostList = (ListView) findViewById(R.id.LostItemList);
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -109,15 +112,26 @@ public class LostItemsActivity extends AppCompatActivity {
                 // Display the selected item
                 Toast.makeText(getApplicationContext(),"Selected : " + item,Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), item.getKey(),Toast.LENGTH_SHORT).show();
-                ref.child(item.getKey()).removeValue();
-                daList.remove(i);
-                adapter.notifyDataSetChanged();*/
-                LostItems item = (LostItems) adapterView.getItemAtPosition(i);
+                */
+                final int position = i;
+                final LostItems item = (LostItems) adapterView.getItemAtPosition(position);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
                 alertDialog.setTitle("A lost item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
                     + "\n" + item.getUserName() + " is looking for this item!");
-                alertDialog.setPositiveButton("Claim it!", null);
+                alertDialog.setPositiveButton("Claim it!",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                foundRef.child(item.getKey()).setValue(item);
+                                ref.child(item.getKey()).removeValue();
+                                daList.remove(position);
+                                adapter.notifyDataSetChanged();
+                            }
+                    }
+
+                );
+
                 alertDialog.setNegativeButton("Cancel", null);
                 alertDialog.show();
             }

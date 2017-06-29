@@ -21,13 +21,8 @@ public class FileSave {
 
 
     public static void fileSave(Context c) throws IOException {
-        ArrayList<User> loadUsers = User.getUsers();
         String newLine = "\n";
         FileOutputStream fos = c.openFileOutput("Users.txt", Context.MODE_PRIVATE);
-        for (User user: loadUsers) {
-            String msg = user.toString() + newLine;
-            fos.write(msg.getBytes());
-        }
         //fos.write(msg.getBytes());
             fos.close();
     }

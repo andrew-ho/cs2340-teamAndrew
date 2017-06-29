@@ -56,14 +56,32 @@ public class LostItems {
         this.name = name;
     }
 
+    /**
+     * empty constructor required for firebase
+     */
     public LostItems(){
 
     }
 
+    /**
+     * constructor chaining
+     * @param name name of item
+     * @param description description of item
+     * @param key key of item
+     * @param userName user who lost it
+     */
     public LostItems(String name, String description, String key, String userName){
         this(name, description, key, userName, null);
     }
 
+    /**
+     * constructor chaining
+     * @param name name of item
+     * @param description description of item
+     * @param key key of item
+     * @param userName user who lost it
+     * @param image image of the item
+     */
     public LostItems(String name, String description, String key,
                      String userName, ImageView image) {
         this.name = name;
@@ -74,8 +92,5 @@ public class LostItems {
         //masterItemList.add(this);
     }
 
-    public static ArrayList<LostItems> getItems() {
-        return masterItemList;
-    }
 
 }

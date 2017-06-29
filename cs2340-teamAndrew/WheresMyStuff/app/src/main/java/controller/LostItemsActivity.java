@@ -113,10 +113,12 @@ public class LostItemsActivity extends AppCompatActivity {
                 daList.remove(i);
                 adapter.notifyDataSetChanged();*/
                 LostItems item = (LostItems) adapterView.getItemAtPosition(i);
-                AlertDialog alertDialog = new AlertDialog.Builder(LostItemsActivity.this).create();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
                 alertDialog.setTitle("A lost item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
                     + "\n" + item.getUserName() + " is looking for this item!");
+                alertDialog.setPositiveButton("Claim it!", null);
+                alertDialog.setNegativeButton("Cancel", null);
                 alertDialog.show();
             }
         });

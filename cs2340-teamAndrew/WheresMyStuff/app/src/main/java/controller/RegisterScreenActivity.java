@@ -56,7 +56,6 @@ import java.util.List;
 
 import cs2340teamandrew.wheresmystuff.R;
 
-import static model.User.getUsers;
 
 /**
  * Created by Alex on 6/20/2017.
@@ -106,7 +105,6 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
-        getUsers();
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

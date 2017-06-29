@@ -26,28 +26,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import cs2340teamandrew.wheresmystuff.R;
+import model.FoundItems;
 import model.LostItems;
 
 public class FoundItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
-    private ListView lostList;
+    private ListView foundList;
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private FloatingActionButton logout;
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private ArrayList<LostItems> daList = new ArrayList<LostItems>();
+    private ArrayList<FoundItems> daList = new ArrayList<FoundItems>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    class ItemAdapter extends ArrayAdapter<LostItems> {
-        ItemAdapter(Context context, ArrayList<LostItems> list) {
+    class ItemAdapter extends ArrayAdapter<FoundItems> {
+        ItemAdapter(Context context, ArrayList<FoundItems> list) {
             super(context,0,list);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LostItems lost = getItem(position);
+            FoundItems found = getItem(position);
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
             }
@@ -55,7 +56,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             TextView itemName = (TextView) convertView.findViewById(R.id.item_name);
             ImageView itemImage = (ImageView) convertView.findViewById(R.id.item_picture);
 
-            itemName.setText(lost.getName());
+            itemName.setText(found.getName());
             itemImage.setImageResource(R.mipmap.default_image);
             return convertView;
         }
@@ -63,19 +64,19 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
-            LostItems item = new LostItems();
-            item.setName(dataSnapshot.getValue(LostItems.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItems.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItems.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItems.class).getUserName());
+            FoundItems item = new FoundItems();
+            item.setName(dataSnapshot.getValue(FoundItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(FoundItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(FoundItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(FoundItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
-            LostItems item = new LostItems();
-            item.setName(dataSnapshot.getValue(LostItems.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItems.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItems.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItems.class).getUserName());
+            FoundItems item = new FoundItems();
+            item.setName(dataSnapshot.getValue(FoundItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(FoundItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(FoundItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(FoundItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         }
@@ -91,8 +92,8 @@ public class FoundItemsActivity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
         //sets listview
-        lostList = (ListView) findViewById(R.id.LostItemList);
-        lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        foundList = (ListView) findViewById(R.id.FoundItemList);
+        foundList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 /*// Get selected item text
@@ -104,11 +105,11 @@ public class FoundItemsActivity extends AppCompatActivity {
                 ref.child(item.getKey()).removeValue();
                 daList.remove(i);
                 adapter.notifyDataSetChanged();*/
-                LostItems item = (LostItems) adapterView.getItemAtPosition(i);
+                FoundItems item = (FoundItems) adapterView.getItemAtPosition(i);
                 AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
-                alertDialog.setTitle("A lost item");
+                alertDialog.setTitle("A found item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                    + "\n" + item.getUserName() + " is looking for this item!");
+                    + "\n" + item.getUserName() + " is found this item!");
                 alertDialog.show();
             }
         });
@@ -132,7 +133,7 @@ public class FoundItemsActivity extends AppCompatActivity {
         //makes adapter
         adapter = new ItemAdapter(getApplicationContext(), daList);
         //sets adapter
-        lostList.setAdapter(adapter);
+        foundList.setAdapter(adapter);
 
         //Firebase listeners
         ref.addChildEventListener(new ChildEventListener() {

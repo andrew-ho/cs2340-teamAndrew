@@ -106,7 +106,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        LostItems dummy = new LostItems("test","testItem");
+        //LostItems dummy = new LostItems("test","testItem");
 
         mAuth = FirebaseAuth.getInstance();
         // Set up the login form.

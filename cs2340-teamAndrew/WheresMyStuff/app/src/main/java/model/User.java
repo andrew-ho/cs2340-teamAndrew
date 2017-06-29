@@ -33,13 +33,13 @@ public class User {
         masterList.add(this);
     }
 
-    public void addLostItem(String name, String description, ImageView image) {
-        myLostItems.add(new LostItems(name,description,image));
-    }
+    //public void addLostItem(String name, String description, String key, ImageView image) {
+        //myLostItems.add(new LostItems(name,description,key, image));
+    //}
 
-    public void addLostItem(String name, String description) {
-        myLostItems.add(new LostItems(name, description));
-    }
+    //public void addLostItem(String name, String description, String key) {
+        //myLostItems.add(new LostItems(name, description, key));
+    //}
 
     public static void loadUsers(Context c) throws IOException {
         /*File f = new File("Users.txt");

@@ -29,7 +29,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -54,6 +57,8 @@ public class AddItemActivity extends AppCompatActivity {
     private Button mAdd;
 
     private DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth mAuth;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
@@ -79,8 +84,12 @@ public class AddItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String name = mName.getText().toString();
                 final Editable description = mDescription.getText();
-                LostItems item = new LostItems(name,description.toString());
-                mMyRef.child("Lostitems").push().setValue(item);
+                //LostItems item = new LostItems(name,description.toString());
+                String key = mMyRef.child("Lostitems").push().getKey();
+                String userName = user.getEmail();
+                LostItems item = new LostItems(name,description.toString(), key, userName);
+                //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
+                mMyRef.child("Lostitems").child(key).setValue(item);
                 finish();
             }
         });

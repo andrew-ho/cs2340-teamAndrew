@@ -17,6 +17,24 @@ public class LostItems {
     private ImageView picture;
     private String name;
     private ImageView defaultImage;
+    private String key;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getName() {
         return name;
@@ -42,15 +60,18 @@ public class LostItems {
 
     }
 
-    public LostItems(String name, String description){
-        this(name,description,null);
+    public LostItems(String name, String description, String key, String userName){
+        this(name, description, key, userName, null);
     }
 
-    public LostItems(String name, String description, ImageView image) {
+    public LostItems(String name, String description, String key,
+                     String userName, ImageView image) {
         this.name = name;
         this.description = description;
+        this.key = key;
+        this.userName = userName;
         this.picture = image;
-        masterItemList.add(this);
+        //masterItemList.add(this);
     }
 
     public static ArrayList<LostItems> getItems() {

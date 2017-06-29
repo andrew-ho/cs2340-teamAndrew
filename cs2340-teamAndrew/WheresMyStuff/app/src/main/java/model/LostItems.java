@@ -6,8 +6,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 /**
- * Created by Andrew Tuttle on 6/22/2017.
- * Models the items lost by our lovely users.
+ * @author team11
+ * @version 1.0
  */
 
 public class LostItems {
@@ -19,43 +19,81 @@ public class LostItems {
     private ImageView defaultImage;
     private String key;
     private String userName;
-
+    /**
+     * gets username
+     * @return username
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * sets username
+     * @param userName the username
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * gets key
+     * @return key
+     */
     public String getKey() {
         return key;
     }
 
+    /**
+     * sets key
+     * @param key the key
+     */
     public void setKey(String key) {
         this.key = key;
     }
 
+    /**
+     * gets name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * gets picture
+     * @return picture
+     */
     public ImageView getPicture(){
         return picture;
     }
 
+    /**
+     * gets decription
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * sets description
+     * @param description description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * sets name
+     * @param name name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * empty constructor required for firebase
+     */
     /**
      * empty constructor required for firebase
      */

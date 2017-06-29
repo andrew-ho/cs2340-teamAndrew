@@ -29,6 +29,10 @@ import cs2340teamandrew.wheresmystuff.R;
 import model.FoundItems;
 import model.LostItems;
 
+/**
+ * @author team11
+ * @version 1.0
+ */
 public class FoundItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
@@ -89,7 +93,7 @@ public class FoundItemsActivity extends AppCompatActivity {
 
         //get user data
         //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
-        ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+        ref = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets listview
         foundList = (ListView) findViewById(R.id.FoundItemList);
@@ -122,7 +126,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             }
         });
         //adds item
-        itemAdder = (FloatingActionButton) findViewById(R.id.AddLostItem);
+        itemAdder = (FloatingActionButton) findViewById(R.id.AddFoundItem);
         itemAdder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -37,6 +37,10 @@ import model.LostItems;
 
 import cs2340teamandrew.wheresmystuff.R;
 
+/**
+ * @author team11
+ * @version 1.0
+ */
 public class LostItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;

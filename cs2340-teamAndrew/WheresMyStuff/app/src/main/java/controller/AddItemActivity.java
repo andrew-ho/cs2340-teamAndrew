@@ -41,7 +41,7 @@ import java.util.List;
 
 import controller.LostItemsActivity;
 import cs2340teamandrew.wheresmystuff.R;
-import model.LostItems;
+import model.LostItem;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -87,7 +87,7 @@ public class AddItemActivity extends AppCompatActivity {
                 //LostItems item = new LostItems(name,description.toString());
                 String key = mMyRef.child("Lostitems").push().getKey();
                 String userName = user.getEmail();
-                LostItems item = new LostItems(name,description.toString(), key, userName);
+                LostItem item = new LostItem(name,description.toString(), key, userName);
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
                 mMyRef.child("Lostitems").child(key).setValue(item);
                 finish();

@@ -24,7 +24,7 @@ public class User {
     protected String type;
   
     private static ArrayList<User> masterList = new ArrayList<User>();
-    private ArrayList<LostItems> myLostItems = new ArrayList<>();
+    private ArrayList<LostItem> myLostItems = new ArrayList<>();
 
     /**
      * constructor for user

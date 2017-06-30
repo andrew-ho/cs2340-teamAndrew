@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class LostItems {
+public class LostItem {
 
-    private static ArrayList<LostItems> masterItemList = new ArrayList<>();
+    private static ArrayList<LostItem> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;
@@ -97,7 +97,7 @@ public class LostItems {
     /**
      * empty constructor required for firebase
      */
-    public LostItems(){
+    public LostItem(){
 
     }
 
@@ -108,7 +108,7 @@ public class LostItems {
      * @param key key of item
      * @param userName user who lost it
      */
-    public LostItems(String name, String description, String key, String userName){
+    public LostItem(String name, String description, String key, String userName){
         this(name, description, key, userName, null);
     }
 
@@ -120,7 +120,7 @@ public class LostItems {
      * @param userName user who lost it
      * @param image image of the item
      */
-    public LostItems(String name, String description, String key,
+    public LostItem(String name, String description, String key,
                      String userName, ImageView image) {
         this.name = name;
         this.description = description;

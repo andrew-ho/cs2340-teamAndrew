@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class FoundItem {
-    private static ArrayList<FoundItem> masterItemList = new ArrayList<>();
+public class FoundItems {
+    private static ArrayList<FoundItems> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;
@@ -93,7 +93,7 @@ public class FoundItem {
     /**
      * empty constructor required for firebase
      */
-    public FoundItem(){
+    public FoundItems(){
 
     }
 
@@ -104,7 +104,7 @@ public class FoundItem {
      * @param key key of item
      * @param userName user who lost it
      */
-    public FoundItem(String name, String description, String key, String userName){
+    public FoundItems(String name, String description, String key, String userName){
         this(name, description, key, userName, null);
     }
 
@@ -116,8 +116,8 @@ public class FoundItem {
      * @param userName user who lost it
      * @param image image of the item
      */
-    public FoundItem(String name, String description, String key,
-                     String userName, ImageView image) {
+    public FoundItems(String name, String description, String key,
+                      String userName, ImageView image) {
         this.name = name;
         this.description = description;
         this.key = key;

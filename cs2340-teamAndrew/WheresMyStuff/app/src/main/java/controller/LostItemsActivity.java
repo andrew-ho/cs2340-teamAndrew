@@ -1,13 +1,10 @@
 package controller;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -15,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,12 +23,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import model.LostItem;
+import model.LostItems;
 
 import cs2340teamandrew.wheresmystuff.R;
 
@@ -48,21 +41,21 @@ public class LostItemsActivity extends AppCompatActivity {
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private FloatingActionButton logout;
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private ArrayList<LostItem> daList = new ArrayList<LostItem>();
+    private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
 
 
-    class ItemAdapter extends ArrayAdapter<LostItem> {
-        ItemAdapter(Context context, ArrayList<LostItem> list) {
+    class ItemAdapter extends ArrayAdapter<LostItems> {
+        ItemAdapter(Context context, ArrayList<LostItems> list) {
             super(context,0,list);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LostItem lost = getItem(position);
+            LostItems lost = getItem(position);
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
             }
@@ -78,19 +71,19 @@ public class LostItemsActivity extends AppCompatActivity {
 
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
-            LostItem item = new LostItem();
-            item.setName(dataSnapshot.getValue(LostItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
+            LostItems item = new LostItems();
+            item.setName(dataSnapshot.getValue(LostItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(LostItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(LostItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(LostItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
-            LostItem item = new LostItem();
-            item.setName(dataSnapshot.getValue(LostItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
+            LostItems item = new LostItems();
+            item.setName(dataSnapshot.getValue(LostItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(LostItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(LostItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(LostItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         }
@@ -118,7 +111,7 @@ public class LostItemsActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), item.getKey(),Toast.LENGTH_SHORT).show();
                 */
                 final int position = i;
-                final LostItem item = (LostItem) adapterView.getItemAtPosition(position);
+                final LostItems item = (LostItems) adapterView.getItemAtPosition(position);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
                 alertDialog.setTitle("A lost item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()

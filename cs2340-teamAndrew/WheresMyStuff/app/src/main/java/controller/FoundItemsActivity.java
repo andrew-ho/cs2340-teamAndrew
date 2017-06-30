@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import cs2340teamandrew.wheresmystuff.R;
-import model.FoundItem;
+import model.FoundItems;
 
 /**
  * @author team11
@@ -39,19 +39,19 @@ public class FoundItemsActivity extends AppCompatActivity {
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private FloatingActionButton logout;
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private ArrayList<FoundItem> daList = new ArrayList<FoundItem>();
+    private ArrayList<FoundItems> daList = new ArrayList<FoundItems>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    class ItemAdapter extends ArrayAdapter<FoundItem> {
-        ItemAdapter(Context context, ArrayList<FoundItem> list) {
+    class ItemAdapter extends ArrayAdapter<FoundItems> {
+        ItemAdapter(Context context, ArrayList<FoundItems> list) {
             super(context,0,list);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            FoundItem found = getItem(position);
+            FoundItems found = getItem(position);
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
             }
@@ -67,19 +67,19 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
-            FoundItem item = new FoundItem();
-            item.setName(dataSnapshot.getValue(FoundItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
+            FoundItems item = new FoundItems();
+            item.setName(dataSnapshot.getValue(FoundItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(FoundItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(FoundItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(FoundItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
-            FoundItem item = new FoundItem();
-            item.setName(dataSnapshot.getValue(FoundItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
+            FoundItems item = new FoundItems();
+            item.setName(dataSnapshot.getValue(FoundItems.class).getName());
+            item.setDescription(dataSnapshot.getValue(FoundItems.class).getDescription());
+            item.setKey(dataSnapshot.getValue(FoundItems.class).getKey());
+            item.setUserName(dataSnapshot.getValue(FoundItems.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         }
@@ -108,7 +108,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                 ref.child(item.getKey()).removeValue();
                 daList.remove(i);
                 adapter.notifyDataSetChanged();*/
-                FoundItem item = (FoundItem) adapterView.getItemAtPosition(i);
+                FoundItems item = (FoundItems) adapterView.getItemAtPosition(i);
                 AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                 alertDialog.setTitle("A found item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()

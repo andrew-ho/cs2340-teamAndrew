@@ -1,17 +1,6 @@
 package model;
 
-import android.content.Context;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
 
 
 /**
@@ -24,7 +13,7 @@ public class User {
     protected String type;
   
     private static ArrayList<User> masterList = new ArrayList<User>();
-    private ArrayList<LostItem> myLostItems = new ArrayList<>();
+    private ArrayList<LostItems> myLostItems = new ArrayList<>();
 
     /**
      * constructor for user

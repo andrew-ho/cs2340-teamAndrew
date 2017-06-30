@@ -1,6 +1,5 @@
 package model;
 
-import android.media.Image;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -10,9 +9,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class LostItem {
+public class LostItems {
 
-    private static ArrayList<LostItem> masterItemList = new ArrayList<>();
+    private static ArrayList<LostItems> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;
@@ -97,7 +96,7 @@ public class LostItem {
     /**
      * empty constructor required for firebase
      */
-    public LostItem(){
+    public LostItems(){
 
     }
 
@@ -108,7 +107,7 @@ public class LostItem {
      * @param key key of item
      * @param userName user who lost it
      */
-    public LostItem(String name, String description, String key, String userName){
+    public LostItems(String name, String description, String key, String userName){
         this(name, description, key, userName, null);
     }
 
@@ -120,7 +119,7 @@ public class LostItem {
      * @param userName user who lost it
      * @param image image of the item
      */
-    public LostItem(String name, String description, String key,
+    public LostItems(String name, String description, String key,
                      String userName, ImageView image) {
         this.name = name;
         this.description = description;

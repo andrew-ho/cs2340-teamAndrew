@@ -35,6 +35,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +67,21 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     private View mLoginFormView;
 
     private FirebaseAuth mAuth;
+
+    public static String  encryptPW(String password) {
+        for (int i = 0; i < 10000; i++) {
+        }
+        return null;
+    }
+
+    public static String encryptMessage(String password) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("AES");
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+        return null;
+    }
 
     /**
      * signs in user with email and password

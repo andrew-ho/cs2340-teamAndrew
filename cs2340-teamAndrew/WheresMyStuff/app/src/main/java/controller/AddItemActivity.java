@@ -14,7 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import cs2340teamandrew.wheresmystuff.R;
-import model.LostItems;
+import model.Item;
+import model.LostItem;
 
 /**
  * A login screen that offers login via email/password.
@@ -58,7 +59,7 @@ public class AddItemActivity extends AppCompatActivity {
                 //LostItems item = new LostItems(name,description.toString());
                 String key = mMyRef.child("Lostitems").push().getKey();
                 String userName = user.getEmail();
-                LostItems item = new LostItems(name,description.toString(), key, userName);
+                LostItem item = new LostItem(name, description.toString(), key, userName);
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
                 mMyRef.child("Lostitems").child(key).setValue(item);
                 finish();

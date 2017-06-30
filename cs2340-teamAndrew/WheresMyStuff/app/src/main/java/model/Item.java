@@ -5,19 +5,19 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 /**
- * @author team11
- * @version 1.0
+ * Created by Andrew Tuttle on 6/30/2017.
  */
 
-public class LostItems {
+public abstract class Item {
 
-    private static ArrayList<LostItems> masterItemList = new ArrayList<>();
+    private static ArrayList<FoundItem> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;
     private ImageView defaultImage;
     private String key;
     private String userName;
+
     /**
      * gets username
      * @return username
@@ -93,10 +93,7 @@ public class LostItems {
     /**
      * empty constructor required for firebase
      */
-    /**
-     * empty constructor required for firebase
-     */
-    public LostItems(){
+    public Item(){
 
     }
 
@@ -105,9 +102,9 @@ public class LostItems {
      * @param name name of item
      * @param description description of item
      * @param key key of item
-     * @param userName user who lost it
+     * @param userName user who submitted the item
      */
-    public LostItems(String name, String description, String key, String userName){
+    public Item(String name, String description, String key, String userName){
         this(name, description, key, userName, null);
     }
 
@@ -119,7 +116,7 @@ public class LostItems {
      * @param userName user who lost it
      * @param image image of the item
      */
-    public LostItems(String name, String description, String key,
+    public Item(String name, String description, String key,
                      String userName, ImageView image) {
         this.name = name;
         this.description = description;
@@ -128,6 +125,5 @@ public class LostItems {
         this.picture = image;
         //masterItemList.add(this);
     }
-
 
 }

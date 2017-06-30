@@ -22,8 +22,7 @@ public class User {
     private String username;
     private String password;
     private String type;
-    private boolean isAdmin;
-
+  
     private static ArrayList<User> masterList = new ArrayList<User>();
     private ArrayList<LostItems> myLostItems = new ArrayList<>();
 

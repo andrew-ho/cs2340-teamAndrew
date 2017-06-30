@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +48,7 @@ public class LostItemsActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
+    private SearchView searchView;
 
 
     class ItemAdapter extends ArrayAdapter<LostItems> {
@@ -133,6 +136,7 @@ public class LostItemsActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
         //sets logout
         logout = (FloatingActionButton) findViewById(R.id.Logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +145,7 @@ public class LostItemsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         //adds item
         itemAdder = (FloatingActionButton) findViewById(R.id.AddLostItem);
         itemAdder.setOnClickListener(new View.OnClickListener() {
@@ -150,10 +155,69 @@ public class LostItemsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         //makes adapter
         adapter = new ItemAdapter(getApplicationContext(), daList);
+
         //sets adapter
         lostList.setAdapter(adapter);
+
+        // search
+        searchView = (SearchView) findViewById(R.id.search_bar_lostItems);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                boolean foundItem = false;
+                for(int i=0;i<daList.size();i++) {
+                    final LostItems item = daList.get(i);
+                    final int position = i;
+                    if (item.getName().equals(query)) {
+                        Log.d("LostItemsActivity", "found item");
+                        foundItem = true;
+
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
+                        alertDialog.setTitle("A lost item");
+                        alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
+                                + "\n" + item.getUserName() + " is looking for this item!");
+                        alertDialog.setPositiveButton("Claim it!",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        foundRef.child(item.getKey()).setValue(item);
+                                        ref.child(item.getKey()).removeValue();
+                                        daList.remove(position);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }
+
+                        );
+
+                        alertDialog.setNegativeButton("Cancel", null);
+                        alertDialog.show();
+
+                    }
+                }
+
+                if(!foundItem) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
+                    alertDialog.setTitle("Did not find lost item");
+                }
+
+                Log.d("LostItemsActivity", query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                Log.d("LostItemsActivity", newText);
+                return false;
+            }
+        });
+
+
 
         //Firebase listeners
         ref.addChildEventListener(new ChildEventListener() {

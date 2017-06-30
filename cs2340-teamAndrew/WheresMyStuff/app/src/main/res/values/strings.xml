@@ -26,4 +26,6 @@
     <string name="list_item_button">List Item as Missing</string>
     <string name="cancel_item_list">Cancel</string>
     <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="app_label">Lost Items</string>
+    <string name="search_hint">Search lost items</string>
 </resources>

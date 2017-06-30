@@ -18,6 +18,11 @@
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <SearchView
+        android:id="@+id/search_bar_foundItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

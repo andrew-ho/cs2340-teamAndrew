@@ -1,11 +1,13 @@
 package controller;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +31,7 @@ import java.util.ArrayList;
 
 import cs2340teamandrew.wheresmystuff.R;
 import model.FoundItems;
+import model.LostItems;
 
 /**
  * @author team11
@@ -43,6 +48,7 @@ public class FoundItemsActivity extends AppCompatActivity {
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private SearchView searchView;
 
     class ItemAdapter extends ArrayAdapter<FoundItems> {
         ItemAdapter(Context context, ArrayList<FoundItems> list) {
@@ -116,6 +122,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
         //sets logout
         logout = (FloatingActionButton) findViewById(R.id.Logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +131,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         //adds item
         itemAdder = (FloatingActionButton) findViewById(R.id.AddFoundItem);
         itemAdder.setOnClickListener(new View.OnClickListener() {
@@ -133,10 +141,55 @@ public class FoundItemsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         //makes adapter
         adapter = new ItemAdapter(getApplicationContext(), daList);
+
         //sets adapter
         foundList.setAdapter(adapter);
+
+        // search found items
+        searchView = (SearchView) findViewById(R.id.search_bar_foundItems);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                boolean foundItem = false;
+                for(int i=0;i<daList.size();i++) {
+                    final FoundItems item = daList.get(i);
+                    final int position = i;
+                    if (item.getName().equals(query)) {
+                        Log.d("FoundItemsActivity", "found item");
+                        foundItem = true;
+
+                        AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
+                        alertDialog.setTitle("A found item");
+                        alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
+                                + "\n" + item.getUserName() + " is found this item!");
+                        alertDialog.show();
+
+                    }
+                }
+
+                if(!foundItem) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoundItemsActivity.this);
+                    alertDialog.setTitle("Item not found!");
+                }
+
+                Log.d("LostItemsActivity", query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                Log.d("LostItemsActivity", newText);
+                return false;
+            }
+        });
+
+
 
         //Firebase listeners
         ref.addChildEventListener(new ChildEventListener() {

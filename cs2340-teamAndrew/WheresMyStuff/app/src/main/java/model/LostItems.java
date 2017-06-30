@@ -67,7 +67,7 @@ public class LostItems {
     }
 
     /**
-     * gets decription
+     * gets description
      * @return description
      */
     public String getDescription() {

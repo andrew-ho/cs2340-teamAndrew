@@ -21,7 +21,7 @@ import java.io.File;
 public class User {
     private String username;
     private String password;
-    private String type;
+    protected String type;
   
     private static ArrayList<User> masterList = new ArrayList<User>();
     private ArrayList<LostItems> myLostItems = new ArrayList<>();
@@ -30,12 +30,11 @@ public class User {
      * constructor for user
      * @param username username of user
      * @param password password of user
-     * @param type type of user
      */
-    public User(String username, String password, String type) {
+    public User(String username, String password) {
         this.password = password;
         this.username = username;
-        this.type = type;
+        this.type = "User";
         masterList.add(this);
     }
 

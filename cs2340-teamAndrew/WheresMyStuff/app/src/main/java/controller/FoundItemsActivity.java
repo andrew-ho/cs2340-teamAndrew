@@ -172,7 +172,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                         AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                         alertDialog.setTitle("A found item");
                         alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                                + "\n" + item.getUserName() + " is found this item!");
+                                + "\n" + item.getUserName() + " has found this item!");
                         alertDialog.show();
 
                     }

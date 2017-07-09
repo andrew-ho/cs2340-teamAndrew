@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Map;
+
 import cs2340teamandrew.wheresmystuff.R;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -36,6 +38,16 @@ public class HomePageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button MapScreenButton = (Button) findViewById(R.id.MapScreen);
+        MapScreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
 }

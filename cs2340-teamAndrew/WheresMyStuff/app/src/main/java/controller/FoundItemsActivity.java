@@ -98,7 +98,7 @@ public class FoundItemsActivity extends AppCompatActivity {
 
         //get user data
         //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
-        ref = FirebaseDatabase.getInstance().getReference().child("FoundItem");
+        ref = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets listview
         foundList = (ListView) findViewById(R.id.FoundItemList);
@@ -118,7 +118,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                 AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                 alertDialog.setTitle("A found item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                    + "\n" + item.getUserName() + " is found this item!");
+                    + "\n" + item.getUserName() + " has found this item!");
                 alertDialog.show();
             }
         });
@@ -166,7 +166,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                         AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                         alertDialog.setTitle("A found item");
                         alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                                + "\n" + item.getUserName() + " is found this item!");
+                                + "\n" + item.getUserName() + " has found this item!");
                         alertDialog.show();
 
                     }

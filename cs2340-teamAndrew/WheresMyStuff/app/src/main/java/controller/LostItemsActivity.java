@@ -101,6 +101,7 @@ public class LostItemsActivity extends AppCompatActivity {
         //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
         foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
+
         //sets listview
         lostList = (ListView) findViewById(R.id.LostItemList);
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -171,7 +172,7 @@ public class LostItemsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 boolean foundItem = false;
                 for(int i=0;i<daList.size();i++) {
-                    final LostItems item = daList.get(i);
+                    final LostItem item = daList.get(i);
                     final int position = i;
                     if (item.getName().equals(query)) {
                         Log.d("LostItemsActivity", "found item");
@@ -202,7 +203,10 @@ public class LostItemsActivity extends AppCompatActivity {
 
                 if(!foundItem) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
-                    alertDialog.setTitle("Did not find lost item");
+                    alertDialog.setTitle("Search results");
+                    alertDialog.setMessage("Item not found!");
+                    alertDialog.create();
+                    alertDialog.show();
                 }
 
                 Log.d("LostItemsActivity", query);

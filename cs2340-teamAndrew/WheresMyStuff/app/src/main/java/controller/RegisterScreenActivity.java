@@ -75,6 +75,11 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
     private FirebaseAuth mAuth;
 
 
+    /**
+     * Let user create an account
+     * @param email     user's account email
+     * @param password  user's account password
+     */
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -151,6 +156,9 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    /**
+     * check for valid password, then make an account if the password is valid
+     */
     private void attemptRegistration() {
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -209,6 +217,10 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
 
     }
 
+    /**
+     * add a list of emails to the adaptor
+     * @param emailAddressCollection    the list of emails to be added
+     */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =

@@ -68,6 +68,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
     private FirebaseAuth mAuth;
 
+
     public static String  encryptPW(String password) {
         for (int i = 0; i < 10000; i++) {
         }
@@ -162,6 +163,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         mProgressView = findViewById(R.id.login_progress);
     }
 
+
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -169,6 +171,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
         getLoaderManager().initLoader(0, null, this);
     }
+
 
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -202,6 +205,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         }
     }
     //TODO: IMPLEMENT RESGISTRATION SCREEN
+
 
     private void attemptRegistration() {
         Intent intent = new Intent(getApplicationContext(), RegisterScreenActivity.class);
@@ -266,6 +270,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         }
     }
 
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -283,6 +288,11 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
+    /**
+     * load a list of emails to auto complete text view
+     * @param cursorLoader  the cursorLoader
+     * @param cursor    cursor of the loader
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         List<String> emails = new ArrayList<>();
@@ -300,6 +310,10 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
     }
 
+    /**
+     * add emails to AutoCompleteTextView
+     * @param emailAddressCollection
+     */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =

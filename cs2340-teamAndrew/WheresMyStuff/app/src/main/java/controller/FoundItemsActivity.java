@@ -41,15 +41,16 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
     private ListView foundList;
-    //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private FloatingActionButton logout;
-    //private ArrayList<String> showitems = new ArrayList<String>();
     private ArrayList<FoundItem> daList = new ArrayList<FoundItem>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private SearchView searchView;
 
+    /**
+     * class of ItemAdapter that holds and display an array of FoundItem
+     */
     class ItemAdapter extends ArrayAdapter<FoundItem> {
         ItemAdapter(Context context, ArrayList<FoundItem> list) {
             super(context,0,list);
@@ -71,6 +72,10 @@ public class FoundItemsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Create/add a found item to an array list
+     * @param dataSnapshot  found item data
+     */
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
             FoundItem item = new FoundItem();
@@ -148,7 +153,8 @@ public class FoundItemsActivity extends AppCompatActivity {
         //sets adapter
         foundList.setAdapter(adapter);
 
-        // search found items
+
+        // search through found items
         searchView = (SearchView) findViewById(R.id.search_bar_foundItems);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 

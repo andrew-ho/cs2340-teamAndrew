@@ -50,7 +50,9 @@ public class LostItemsActivity extends AppCompatActivity {
     private DatabaseReference foundRef;
     private SearchView searchView;
 
-
+    /**
+     * class of ItemAdapter that holds and display an array of LostItem
+     */
     private class ItemAdapter extends ArrayAdapter<LostItem> {
         ItemAdapter(Context context, ArrayList<LostItem> list) {
             super(context,0,list);
@@ -72,6 +74,10 @@ public class LostItemsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Create/add a LostItem to an arrayList of lostItems
+     * @param dataSnapshot  input data of the lost item
+     */
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
             LostItem item = new LostItem();

@@ -1,7 +1,10 @@
 package controller;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +94,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-
     }
+
 
     /** Called when the user clicks a marker. */
     @Override
@@ -109,6 +113,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             " has been clicked " + clickCount + " times.",
                     Toast.LENGTH_SHORT).show();
         }
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Item info");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "Positive button",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the

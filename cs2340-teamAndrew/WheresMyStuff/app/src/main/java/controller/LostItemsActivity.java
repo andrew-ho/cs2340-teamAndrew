@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +52,9 @@ public class LostItemsActivity extends AppCompatActivity {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
     private SearchView searchView;
-
+    private MapsActivity map = new MapsActivity();
+    //Location
+    LatLng latLng;
     /**
      * class of ItemAdapter that holds and display an array of LostItem
      */
@@ -113,13 +118,6 @@ public class LostItemsActivity extends AppCompatActivity {
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*// Get selected item text
-                LostItems item = (LostItems) adapterView.getItemAtPosition(i);
-                //ref.getKey();
-                // Display the selected item
-                Toast.makeText(getApplicationContext(),"Selected : " + item,Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), item.getKey(),Toast.LENGTH_SHORT).show();
-                */
                 final int position = i;
                 final LostItem item = (LostItem) adapterView.getItemAtPosition(position);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
@@ -234,6 +232,7 @@ public class LostItemsActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 createList(dataSnapshot);
+                //Toast.makeText(getApplicationContext(), ""  + lat, Toast.LENGTH_LONG).show();
             }
 
             @Override

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import cs2340teamandrew.wheresmystuff.R;
 import model.Item;
+import model.LocationItems;
 import model.LostItem;
 
 /**
@@ -80,29 +81,7 @@ public class AddItemActivity extends AppCompatActivity {
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
-    private final LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            Toast.makeText(getApplicationContext(), "got here", Toast.LENGTH_LONG).show();
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
 
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +105,32 @@ public class AddItemActivity extends AppCompatActivity {
                 123);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                Toast.makeText(getApplicationContext(), "" + latitude, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+        if (checkWriteExternalPermission()) {
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+        }
 
         mAdd = (Button) findViewById(R.id.ListItemButton);
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -139,13 +144,12 @@ public class AddItemActivity extends AppCompatActivity {
                 LostItem item = new LostItem(name, description.toString(), key, userName);
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
                 mMyRef.child("Lostitems").child(key).setValue(item);
-                if (checkWriteExternalPermission()) {
-                    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-                }
+                LocationItems locate = new LocationItems(latitude, longitude);
+                mMyRef.child("Lostitems").child(key).child("Location").setValue(locate);
                 //mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
                 //Toast.makeText(getApplicationContext(), "got here", Toast.LENGTH_LONG).show();
-                mMyRef.child("Lostitems").child(key).child("Location").child("Latitude").setValue(latitude);
-                mMyRef.child("Lostitems").child(key).child("Location").child("Longitude").setValue(longitude);
+                //mMyRef.child("Lostitems").child(key).child("Location").child("Latitude").setValue(latitude);
+                //mMyRef.child("Lostitems").child(key).child("Location").child("Longitude").setValue(longitude);
                 finish();
             }
         });

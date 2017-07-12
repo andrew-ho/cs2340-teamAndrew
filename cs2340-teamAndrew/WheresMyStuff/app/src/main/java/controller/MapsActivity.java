@@ -28,6 +28,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+    private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,18 +57,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        locat.addChildEventListener(new ChildEventListener() {
+        /*locat.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                LostItem item = new LostItem();
+                item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
+                //DatabaseReference childRef = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(item.getKey()).child("Location");
                 LocationItems locate = new LocationItems();
-                locate.setLatitude(dataSnapshot.getValue(LocationItems.class).getLatitude());
-                locate.setLongitude(dataSnapshot.getValue(LocationItems.class).getLongitude());
-                LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-                Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(dataSnapshot.getValue(LostItem.class).getName()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                a.setTag(0);
-                mMap.setOnMarkerClickListener(MapsActivity.this);
+                //locate.setLatitude(dataSnapshot.child(dataSnapshot.getKey()).child("Location").getValue(LocationItems.class).getLatitude());
+                //locate.setLongitude(dataSnapshot.child(dataSnapshot.getKey()).child("Location").getValue(LocationItems.class).getLongitude());
+                //LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                //locate.setLatitude(dataSnapshot.getValue(LocationItems.class).getLatitude());
+                //Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(dataSnapshot.getValue(LostItem.class).getName()));
+                //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                //a.setTag(0);
+                //mMap.setOnMarkerClickListener(MapsActivity.this);
                 //Toast.makeText(getApplicationContext(), dataSnapshot.getValue().toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "" + locate.getLatitude(), Toast.LENGTH_LONG).show();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                }
             }
 
             @Override
@@ -89,8 +98,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
+        locat.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    LocationItems locate = new LocationItems();
+                    locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
+                    locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    mMap.setOnMarkerClickListener(MapsActivity.this);
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        foundPos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    LocationItems locate = new LocationItems();
+                    locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
+                    locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    mMap.setOnMarkerClickListener(MapsActivity.this);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /** Called when the user clicks a marker. */

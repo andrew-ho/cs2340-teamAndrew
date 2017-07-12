@@ -21,7 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import cs2340teamandrew.wheresmystuff.R;
+import model.FoundItem;
 import model.Item;
 import model.LocationItems;
 import model.LostItem;
@@ -33,7 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
     private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
-
+    private HashMap<Marker, Item> hash = new HashMap<Marker, Item>();
 
 
     @Override
@@ -68,7 +71,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
                     locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    LostItem item = new LostItem();
+                    item.setName(data.getValue(LostItem.class).getName());
                     Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    hash.put(a, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }
             }
@@ -87,7 +93,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
                     locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    FoundItem item = new FoundItem();
+                    item.setName(data.getValue(FoundItem.class).getName());
+                    //Toast.makeText(getApplicationContext(), data.getValue(FoundItem.class).getName(), Toast.LENGTH_LONG).show();
+                    hash.put(marker, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }
             }
@@ -101,24 +111,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     /** Called when the user clicks a marker. */
-    @Override
     public boolean onMarkerClick(final Marker marker) {
-
+        Item item = hash.get(marker);
         // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
         marker.showInfoWindow();
         // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1;
-            marker.setTag(clickCount);
-            Toast.makeText(this,
-                    marker.getTitle() +
-                            " has been clicked " + clickCount + " times.",
-                    Toast.LENGTH_SHORT).show();
-        }
-
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Item info");
+        builder1.setMessage(item.getName());
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "Positive button",

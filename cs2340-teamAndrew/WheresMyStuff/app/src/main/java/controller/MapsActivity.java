@@ -73,6 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
                     LostItem item = new LostItem();
                     item.setName(data.getValue(LostItem.class).getName());
+                    item.setDescription(data.getValue(LostItem.class).getDescription());
                     Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
                     hash.put(a, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
@@ -96,6 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
                     FoundItem item = new FoundItem();
                     item.setName(data.getValue(FoundItem.class).getName());
+                    item.setDescription(data.getValue(FoundItem.class).getDescription());
                     //Toast.makeText(getApplicationContext(), data.getValue(FoundItem.class).getName(), Toast.LENGTH_LONG).show();
                     hash.put(marker, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
@@ -117,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker.showInfoWindow();
         // Check if a click count was set, then display the click count.
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage(item.getName());
+        builder1.setMessage(item.getName() + "\n" + item.getDescription());
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "Positive button",

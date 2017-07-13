@@ -26,6 +26,12 @@
         android:text="Found Items" />
 
     <Button
+        android:id="@+id/AddItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Item" />
+
+    <Button
         android:id="@+id/MapScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

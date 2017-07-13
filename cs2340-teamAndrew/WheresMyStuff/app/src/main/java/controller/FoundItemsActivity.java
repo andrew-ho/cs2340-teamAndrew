@@ -137,16 +137,6 @@ public class FoundItemsActivity extends AppCompatActivity {
             }
         });
 
-        //adds item
-        itemAdder = (FloatingActionButton) findViewById(R.id.AddFoundItem);
-        itemAdder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AddItemActivity.class);
-                startActivity(intent);
-            }
-        });
-
         //makes adapter
         adapter = new ItemAdapter(getApplicationContext(), daList);
 

@@ -151,16 +151,6 @@ public class LostItemsActivity extends AppCompatActivity {
             }
         });
 
-        //adds item
-        itemAdder = (FloatingActionButton) findViewById(R.id.AddLostItem);
-        itemAdder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AddItemActivity.class);
-                startActivity(intent);
-            }
-        });
-
         //makes adapter
         adapter = new ItemAdapter(getApplicationContext(), daList);
 

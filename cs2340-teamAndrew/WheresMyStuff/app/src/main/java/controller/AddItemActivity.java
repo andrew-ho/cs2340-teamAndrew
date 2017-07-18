@@ -4,10 +4,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.location.LocationManager;
-import android.widget.RadioButton;
 import android.widget.Toast;
+import android.provider.MediaStore;
+import android.widget.RadioButton;
+import model.FoundItem;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,15 +28,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import cs2340teamandrew.wheresmystuff.R;
-import model.FoundItem;
 import model.Item;
+import model.LocationItems;
 import model.LostItem;
 
 /**
- * A additem screen that adds item
- *
- * @author teamAndrew
- * @version 1.0
+ * A login screen that offers login via email/password.
  */
 public class AddItemActivity extends AppCompatActivity {
 
@@ -43,11 +42,10 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText mDescription;
     private Button mCancel;
     private Button mAdd;
+    private LocationManager locationManager;
     private RadioButton mLost;
     private RadioButton mFound;
-    private LocationManager locationManager;
     private boolean foundLost;
-
     private DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth mAuth;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -66,20 +64,14 @@ public class AddItemActivity extends AppCompatActivity {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
         }
-
         @Override
         public void onStatusChanged(String s, int i, Bundle bundle) {
-
         }
-
         @Override
         public void onProviderEnabled(String s) {
-
         }
-
         @Override
         public void onProviderDisabled(String s) {
-
         }
     };
 */private boolean checkWriteExternalPermission()
@@ -89,29 +81,7 @@ public class AddItemActivity extends AppCompatActivity {
         int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
-    private final LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            Toast.makeText(getApplicationContext(), "got here", Toast.LENGTH_LONG).show();
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-        }
 
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,15 +105,15 @@ public class AddItemActivity extends AppCompatActivity {
                 123);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        mFound = (RadioButton) findViewById(R.id.Found);
-        mFound.setOnClickListener(new View.OnClickListener() {
+             mFound = (RadioButton) findViewById(R.id.Found);
+             mFound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 foundLost = true;
             }
         });
 
-        mLost = (RadioButton) findViewById(R.id.Lost);
+      mLost = (RadioButton) findViewById(R.id.Lost);
         mLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +121,32 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                Toast.makeText(getApplicationContext(), "" + latitude, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        };
+        if (checkWriteExternalPermission()) {
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+        }
 
         mAdd = (Button) findViewById(R.id.ListItemButton);
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -159,28 +155,28 @@ public class AddItemActivity extends AppCompatActivity {
                 final String name = mName.getText().toString();
                 final Editable description = mDescription.getText();
                 //LostItems item = new LostItems(name,description.toString());
-                String key;
+                String key = mMyRef.child("Lostitems").push().getKey();
                 String userName = user.getEmail();
-                String destination;
-                Item item;
-                if (foundLost) {
-                    destination = "Founditems";
-                    key = mMyRef.child(destination).push().getKey();
-                    item = new FoundItem(name, description.toString(),key, userName);
-                } else {
-                    destination = "Lostitems";
-                    key = mMyRef.child(destination).push().getKey();
-                    item = new LostItem(name, description.toString(), key, userName);
-                }
+                                String destination;
+                                Item item;
+                                if (foundLost) {
+                                    destination = "Founditems";
+                                    key = mMyRef.child(destination).push().getKey();
+                                    item = new FoundItem(name, description.toString(),key, userName);
+                              } else {
+                                    destination = "Lostitems";
+                                    key = mMyRef.child(destination).push().getKey();
+                                    item = new LostItem(name, description.toString(), key, userName);
+                                }
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
                 mMyRef.child(destination).child(key).setValue(item);
-                if (checkWriteExternalPermission()) {
-                    mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-                }
+                LocationItems locate = new LocationItems(latitude, longitude);
+                //LocationItems locate = new LocationItems(latitude, longitude);
+                mMyRef.child(destination).child(key).child("Location").setValue(locate);
                 //mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
                 //Toast.makeText(getApplicationContext(), "got here", Toast.LENGTH_LONG).show();
-                mMyRef.child(destination).child(key).child("Location").child("Latitude").setValue(latitude);
-                mMyRef.child(destination).child(key).child("Location").child("Longitude").setValue(longitude);
+                //mMyRef.child(destination).child(key).child("Location").child("Latitude").setValue(latitude);
+                //mMyRef.child(destination).child(key).child("Location").child("Longitude").setValue(longitude);
                 finish();
             }
         });
@@ -188,5 +184,3 @@ public class AddItemActivity extends AppCompatActivity {
 
     }
 }
-
-

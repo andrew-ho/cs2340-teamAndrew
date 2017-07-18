@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.LostItem;
 
@@ -61,7 +62,7 @@ public class LostItemsActivity extends AppCompatActivity {
      * class of ItemAdapter that holds and display an array of LostItem
      */
     private class ItemAdapter extends ArrayAdapter<LostItem> {
-        ItemAdapter(Context context, ArrayList<LostItem> list) {
+        ItemAdapter(Context context, List<LostItem> list) {
             super(context,0,list);
         }
 
@@ -167,7 +168,7 @@ public class LostItemsActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 boolean foundItem = false;
-                for(int i=0;i<daList.size();i++) {
+                for(int i=0; i < daList.size(); i++) {
                     final LostItem item = daList.get(i);
                     final int position = i;
                     if (item.getName().equals(query)) {

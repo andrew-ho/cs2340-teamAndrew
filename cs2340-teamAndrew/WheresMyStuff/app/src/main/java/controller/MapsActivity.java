@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import cs2340teamandrew.wheresmystuff.R;
 import model.FoundItem;
@@ -41,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
     private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
-    private HashMap<Marker, Item> hash = new HashMap<Marker, Item>();
+    private Map<Marker, Item> hash = new HashMap<Marker, Item>();
 
 
     @Override

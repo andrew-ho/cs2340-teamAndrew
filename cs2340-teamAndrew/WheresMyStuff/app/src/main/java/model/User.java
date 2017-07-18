@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -12,7 +13,7 @@ public class User {
     private String password;
     protected String type;
   
-    private static ArrayList<User> masterList = new ArrayList<>();
+    private static List<User> masterList = new ArrayList<>();
     private ArrayList<LostItem> myLostItems = new ArrayList<>();
 
     /**

@@ -57,7 +57,9 @@ import cs2340teamandrew.wheresmystuff.R;
 
 
 /**
- * Created by Alex on 6/20/2017.
+ * Activity to handle registration
+ * @author teamAndrew
+ * @version 1.0
  */
 
 public class RegisterScreenActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {

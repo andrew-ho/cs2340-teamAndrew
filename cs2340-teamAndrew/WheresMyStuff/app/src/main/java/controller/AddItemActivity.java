@@ -31,7 +31,10 @@ import model.Item;
 import model.LostItem;
 
 /**
- * A login screen that offers login via email/password.
+ * A additem screen that adds item
+ *
+ * @Author teamAndrew
+ * @version 1.0
  */
 public class AddItemActivity extends AppCompatActivity {
 

@@ -14,6 +14,11 @@ import java.util.Map;
 
 import cs2340teamandrew.wheresmystuff.R;
 
+/**
+ * activity that handles the home page
+ * @author teamAndrew
+ * @version 1.0
+ */
 public class HomePageActivity extends AppCompatActivity {
 
     @Override

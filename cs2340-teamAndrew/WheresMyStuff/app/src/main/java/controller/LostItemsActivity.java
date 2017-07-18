@@ -37,7 +37,8 @@ import model.LostItem;
 import cs2340teamandrew.wheresmystuff.R;
 
 /**
- * @author team11
+ * Activity that handles the lost items page
+ * @author teamAndrew
  * @version 1.0
  */
 public class LostItemsActivity extends AppCompatActivity {

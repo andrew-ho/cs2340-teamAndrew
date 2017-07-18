@@ -29,6 +29,11 @@ import model.Item;
 import model.LocationItems;
 import model.LostItem;
 
+/**
+ * Activity for the Maps Page
+ * @author teamAndrew
+ * @version 1.0
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
@@ -111,7 +116,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    /** Called when the user clicks a marker. */
+    /** Called when the user clicks a marker.
+     *
+     * @param marker marker for map
+     * @return boolean true or false for marker
+     * */
     public boolean onMarkerClick(final Marker marker) {
         Item item = hash.get(marker);
         // Retrieve the data from the marker.

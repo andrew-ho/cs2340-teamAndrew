@@ -47,6 +47,8 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
+ * @author teamAndrew
+ * @version 1.0
  */
 public class LoginScreenActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -69,12 +71,24 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     private FirebaseAuth mAuth;
 
 
+    //TODO: FOR EXTRA CREDIT ENCRYPTION
+
+    /**
+     * Method for the encryption
+     * @param password
+     * @return string
+     */
     public static String  encryptPW(String password) {
         for (int i = 0; i < 10000; i++) {
         }
         return null;
     }
 
+    /**
+     * Method for handling encryption
+     * @param password
+     * @return string
+     */
     public static String encryptMessage(String password) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("AES");

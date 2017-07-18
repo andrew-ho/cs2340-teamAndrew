@@ -35,6 +35,7 @@ import model.FoundItem;
 import model.LostItem;
 
 /**
+ * activity that handles the found item page
  * @author team11
  * @version 1.0
  */

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -41,7 +42,7 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
     private ListView foundList;
-    private FloatingActionButton logout;
+    private Button back;
     private ArrayList<FoundItem> daList = new ArrayList<FoundItem>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
@@ -129,21 +130,11 @@ public class FoundItemsActivity extends AppCompatActivity {
         });
 
         //sets logout
-        logout = (FloatingActionButton) findViewById(R.id.Logout);
-        logout.setOnClickListener(new View.OnClickListener() {
+        back = (Button) findViewById(R.id.Back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        //adds item
-        itemAdder = (FloatingActionButton) findViewById(R.id.AddFoundItem);
-        itemAdder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AddItemActivity.class);
-                startActivity(intent);
             }
         });
 

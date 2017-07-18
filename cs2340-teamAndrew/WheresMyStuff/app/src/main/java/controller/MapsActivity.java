@@ -1,7 +1,10 @@
 package controller;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,7 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import cs2340teamandrew.wheresmystuff.R;
+import model.FoundItem;
 import model.Item;
 import model.LocationItems;
 import model.LostItem;
@@ -28,6 +34,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+
+    private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
+    private HashMap<Marker, Item> hash = new HashMap<Marker, Item>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,37 +63,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        locat.addChildEventListener(new ChildEventListener() {
+        locat.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                LocationItems locate = new LocationItems();
-                locate.setLatitude(dataSnapshot.getValue(LocationItems.class).getLatitude());
-                locate.setLongitude(dataSnapshot.getValue(LocationItems.class).getLongitude());
-                LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-                Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(dataSnapshot.getValue(LostItem.class).getName()));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                a.setTag(0);
-                mMap.setOnMarkerClickListener(MapsActivity.this);
-                //Toast.makeText(getApplicationContext(), dataSnapshot.getValue().toString(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    LocationItems locate = new LocationItems();
+                    locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
+                    locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    LostItem item = new LostItem();
+                    item.setName(data.getValue(LostItem.class).getName());
+                    item.setDescription(data.getValue(LostItem.class).getDescription());
+                    Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    hash.put(a, item);
+                    mMap.setOnMarkerClickListener(MapsActivity.this);
+                }
             }
 
             @Override
@@ -91,24 +86,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        foundPos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    LocationItems locate = new LocationItems();
+                    locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
+                    locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    FoundItem item = new FoundItem();
+                    item.setName(data.getValue(FoundItem.class).getName());
+                    item.setDescription(data.getValue(FoundItem.class).getDescription());
+                    //Toast.makeText(getApplicationContext(), data.getValue(FoundItem.class).getName(), Toast.LENGTH_LONG).show();
+                    hash.put(marker, item);
+                    mMap.setOnMarkerClickListener(MapsActivity.this);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    /** Called when the user clicks a marker. */
-    @Override
-    public boolean onMarkerClick(final Marker marker) {
 
+    /** Called when the user clicks a marker. */
+    public boolean onMarkerClick(final Marker marker) {
+        Item item = hash.get(marker);
         // Retrieve the data from the marker.
-        Integer clickCount = (Integer) marker.getTag();
         marker.showInfoWindow();
         // Check if a click count was set, then display the click count.
-        if (clickCount != null) {
-            clickCount = clickCount + 1;
-            marker.setTag(clickCount);
-            Toast.makeText(this,
-                    marker.getTitle() +
-                            " has been clicked " + clickCount + " times.",
-                    Toast.LENGTH_SHORT).show();
-        }
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage(item.getName() + "\n" + item.getDescription());
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "Positive button",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
 
         // Return false to indicate that we have not consumed the event and that we wish
         // for the default behavior to occur (which is for the camera to move such that the

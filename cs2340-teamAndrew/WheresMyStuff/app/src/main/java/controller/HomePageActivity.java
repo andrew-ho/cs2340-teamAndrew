@@ -39,6 +39,15 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+        Button AddItemButton = (Button) findViewById(R.id.AddItem);
+        AddItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AddItemActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button MapScreenButton = (Button) findViewById(R.id.MapScreen);
         MapScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override

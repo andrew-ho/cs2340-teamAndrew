@@ -180,7 +180,10 @@ public class FoundItemsActivity extends AppCompatActivity {
 
                 if(!foundItem) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoundItemsActivity.this);
-                    alertDialog.setTitle("Item not found!");
+                    alertDialog.setTitle("Search results");
+                    alertDialog.setMessage("Item not found!");
+                    alertDialog.create();
+                    alertDialog.show();
                 }
 
                 Log.d("LostItemsActivity", query);

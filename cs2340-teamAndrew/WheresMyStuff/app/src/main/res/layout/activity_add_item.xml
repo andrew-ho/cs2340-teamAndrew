@@ -48,6 +48,26 @@
                 android:inputType="textMultiLine"
                 android:hint="@string/item_description_field" />
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <RadioButton
+                    android:id="@+id/Lost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lost" />
+
+                <RadioButton
+                    android:id="@+id/Found"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Found" />
+            </RadioGroup>
+
             <Button
                 android:id="@+id/ListItemButton"
                 style="?android:textAppearanceSmall"

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class LostItemsActivity extends AppCompatActivity {
     private FloatingActionButton itemAdder;
     private ListView lostList;
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
-    private FloatingActionButton logout;
+    private Button back;
     //private ArrayList<String> showitems = new ArrayList<String>();
     private ArrayList<LostItem> daList = new ArrayList<LostItem>();
     private ItemAdapter adapter;
@@ -143,8 +144,8 @@ public class LostItemsActivity extends AppCompatActivity {
         });
 
         //sets logout
-        logout = (FloatingActionButton) findViewById(R.id.Logout);
-        logout.setOnClickListener(new View.OnClickListener() {
+        back = (Button) findViewById(R.id.Back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

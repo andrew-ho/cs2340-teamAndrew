@@ -75,7 +75,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
     /**
      * Method for the encryption
-     * @param password
+     * @param password the password
      * @return string
      */
     public static String  encryptPW(String password) {
@@ -86,7 +86,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
     /**
      * Method for handling encryption
-     * @param password
+     * @param password the password
      * @return string
      */
     public static String encryptMessage(String password) {

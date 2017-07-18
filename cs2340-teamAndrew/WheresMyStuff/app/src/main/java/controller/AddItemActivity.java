@@ -33,7 +33,7 @@ import model.LostItem;
 /**
  * A additem screen that adds item
  *
- * @Author teamAndrew
+ * @author teamAndrew
  * @version 1.0
  */
 public class AddItemActivity extends AppCompatActivity {

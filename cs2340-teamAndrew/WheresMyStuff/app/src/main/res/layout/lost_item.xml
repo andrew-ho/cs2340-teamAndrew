@@ -7,10 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name" />
+
     <ImageView
         android:id="@+id/item_picture"
-        android:text="ItemPicture"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:contentDescription="Image @string/title_activity_add_item"
+        android:text="ItemPicture" />
 
 </LinearLayout>

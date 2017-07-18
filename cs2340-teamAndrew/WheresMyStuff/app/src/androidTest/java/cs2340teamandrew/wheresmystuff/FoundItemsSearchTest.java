@@ -1,5 +1,8 @@
-package controller;
-
+package cs2340teamandrew.wheresmystuff;
+/**
+ * Tests searching for found items.
+ * @author Andrew Tuttle atuttle7
+ */
 
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.ViewInteraction;
@@ -11,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import controller.LoginScreenActivity;
 import cs2340teamandrew.wheresmystuff.R;
 
 import static android.support.test.espresso.Espresso.onView;

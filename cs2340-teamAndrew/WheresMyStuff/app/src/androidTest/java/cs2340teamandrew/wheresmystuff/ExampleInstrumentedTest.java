@@ -23,4 +23,9 @@ public class ExampleInstrumentedTest {
 
         assertEquals("cs2340teamandrew.wheresmystuff", appContext.getPackageName());
     }
+
+    @Test
+    public void itemSearch() {
+
+    }
 }

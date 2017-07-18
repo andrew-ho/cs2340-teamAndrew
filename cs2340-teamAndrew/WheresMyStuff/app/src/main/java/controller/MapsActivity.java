@@ -62,7 +62,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         locat.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -119,7 +118,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker.showInfoWindow();
         // Check if a click count was set, then display the click count.
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage(item.getName() + "\n" + item.getDescription());
+        boolean found = item instanceof FoundItem;
+        builder1.setMessage(found ? "Found item:\n" + item.getName() + "\n" + item.getDescription()
+                : "Lost item:\n" + item.getName() + "\n" + item.getDescription());
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "Positive button",

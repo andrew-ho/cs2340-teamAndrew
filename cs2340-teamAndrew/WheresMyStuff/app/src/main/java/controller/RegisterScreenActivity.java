@@ -89,7 +89,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(getApplicationContext(), "Registered succesfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user
@@ -165,18 +165,13 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
-        View focusView = null;
-
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!isPasswordValid(password)) {
+            mPasswordView.requestFocus();
             mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
+        } else {
+            createAccount(email, password);
         }
-
-        createAccount(email, password);
-
     }
 
     private boolean isEmailValid(String email) {

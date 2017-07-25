@@ -40,14 +40,14 @@ public class AddItemActivity extends AppCompatActivity {
     private EditText mDescription;
 
 
-    private LocationManager locationManager;
+    //private LocationManager locationManager;
 
     private boolean foundLost;
     private final DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    private Location location; // location
+    //private Location location; // location
     private double latitude; // latitude
     private double longitude; // longitude
 

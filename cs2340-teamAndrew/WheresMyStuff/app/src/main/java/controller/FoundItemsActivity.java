@@ -38,12 +38,12 @@ import model.FoundItem;
  */
 public class FoundItemsActivity extends AppCompatActivity {
 
-    private FloatingActionButton itemAdder;
+    //private FloatingActionButton itemAdder;
 
     private final ArrayList<FoundItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
 
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     /**

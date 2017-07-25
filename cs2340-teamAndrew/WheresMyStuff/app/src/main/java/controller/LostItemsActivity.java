@@ -42,7 +42,7 @@ import cs2340teamandrew.wheresmystuff.R;
  */
 public class LostItemsActivity extends AppCompatActivity {
 
-    private FloatingActionButton itemAdder;
+    //private FloatingActionButton itemAdder;
 
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
 
@@ -50,12 +50,12 @@ public class LostItemsActivity extends AppCompatActivity {
     private final ArrayList<LostItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
 
-    private final MapsActivity map = new MapsActivity();
+    //private final MapsActivity map = new MapsActivity();
     //Location
-    LatLng latLng;
+    //LatLng latLng;
     /**
      * class of ItemAdapter that holds and display an array of LostItem
      */

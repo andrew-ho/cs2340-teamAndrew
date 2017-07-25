@@ -12,7 +12,7 @@ public class Admin extends User {
      * @param password password of admin
      * @param type String detailing that this user is an Admin.
      */
-    public Admin(String username, String password, String type) {
+    public Admin(String username, String password) {
         super(username,password);
         this.type = "Admin";
     }

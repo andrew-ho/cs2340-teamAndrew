@@ -2,6 +2,8 @@ package model;
 
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+
 
 /**
  * Created by Andrew Tuttle.
@@ -96,6 +98,20 @@ public abstract class Item {
      */
     public Item(){
 
+    }
+
+    public void moveIt(DatabaseReference foundRef, DatabaseReference ref) {
+        foundRef.child(this.getKey()).setValue(this);
+        ref.child(this.getKey()).removeValue();
+    }
+
+    public String toString() {
+        String name = this.getName();
+        String description = this.getDescription();
+        String username = this.getUserName();
+        String message = name + "\n" + description
+                + "\n" + username + " has found this item!";
+        return message;
     }
 
 // --Commented out by Inspection START (7/25/2017 1:46 PM):

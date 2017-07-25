@@ -71,15 +71,14 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     private FirebaseAuth mAuth;
 
 
-    //TODO: FOR EXTRA CREDIT ENCRYPTION
-
     /**
      * Method for the encryption
      * @param password the password
      * @return string
      */
+    final static int ENCRYPT = 10000;
     public static String  encryptPW(String password) {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < ENCRYPT; i++) {
         }
         return null;
     }
@@ -218,7 +217,6 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         }
     }
-    //TODO: IMPLEMENT RESGISTRATION SCREEN
 
 
     private void attemptRegistration() {

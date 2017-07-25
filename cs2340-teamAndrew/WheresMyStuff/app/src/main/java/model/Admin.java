@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Andrew Tuttle on 6/29/2017.
+ * Created by Andrew Tuttle.
  */
 
 public class Admin extends User {

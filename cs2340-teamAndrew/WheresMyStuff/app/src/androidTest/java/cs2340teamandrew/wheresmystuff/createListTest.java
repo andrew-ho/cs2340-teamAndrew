@@ -48,8 +48,10 @@ public class createListTest {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        final int TIMEOUT = 2000;
+        final int TIMEOUTlong = 3000;
         try {
-            Thread.sleep(2000);
+            Thread.sleep(TIMEOUT);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -59,7 +61,7 @@ public class createListTest {
         appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("dummy@dummy.com"), closeSoftKeyboard());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(TIMEOUT);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -78,7 +80,7 @@ public class createListTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(3000);
+            Thread.sleep(TIMEOUTlong);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -91,7 +93,7 @@ public class createListTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(3000);
+            Thread.sleep(TIMEOUTlong);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -104,7 +106,7 @@ public class createListTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(TIMEOUT);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,7 +117,7 @@ public class createListTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(TIMEOUT);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

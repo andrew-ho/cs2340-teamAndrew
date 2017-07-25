@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import controller.LoginScreenActivity;
 import cs2340teamandrew.wheresmystuff.R;
 
+import static android.R.string.cancel;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -31,21 +32,23 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.junit.Assert.*;
+
 
 /**
- * Tests sign in of user
- * @author Alex Chan
- * @version 1.0
+ * Checks if account is created
+ * Created by Andrew Le on 7/18/2017.
  */
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SignInTest {
+public class RegisterScreenActivityTest {
 
     @Rule
     public ActivityTestRule<LoginScreenActivity> mActivityTestRule = new ActivityTestRule<>(LoginScreenActivity.class);
 
     @Test
-    public void loginTest() {
+    public void registerScreenActivityTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -56,60 +59,25 @@ public class SignInTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatAutoCompleteTextView = onView(
-                withId(R.id.email));
-        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("hello@lol.com"), closeSoftKeyboard());
-
-        try {
-            Thread.sleep(SLEEPTIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         ViewInteraction appCompatEditText = onView(
                 withId(R.id.password));
-        appCompatEditText.perform(scrollTo(), replaceText("wrong"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.email_sign_in_button), withText("Sign in"),
-                        withParent(allOf(withId(R.id.email_login_form),
-                                withParent(withId(R.id.login_form))))));
-        appCompatButton.perform(scrollTo(), click());
-
-        ViewInteraction appToastMessage = onView(withText("Authentication failed"));
-        appToastMessage.inRoot(new ToastMatcher()).check(matches(withText("Authentication failed")));
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(SLEEPTIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction appCompatAutoCompleteTextView2 = onView(
-                withId(R.id.email));
-        appCompatAutoCompleteTextView2.perform(scrollTo(), replaceText("dummy@dummy.com"), closeSoftKeyboard());
-
-        try {
-            Thread.sleep(SLEEPTIME);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ViewInteraction appCompatEditText2 = onView(
-                withId(R.id.password));
-        appCompatEditText2.perform(scrollTo(), replaceText("password"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.email_sign_in_button), withText("Sign in"),
-                        withParent(allOf(withId(R.id.email_login_form),
-                                withParent(withId(R.id.login_form))))));
-        appCompatButton2.perform(scrollTo(), click());
+        appCompatEditText.perform(scrollTo(), replaceText("yo"), closeSoftKeyboard());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.Homepage), withText("Home Page"), isDisplayed()));
-        textView.check(matches(withText("Home Page")));
+                allOf(withId(R.id.password), withText("Invalid pass"), isDisplayed()));
+
+        textView.check(matches(withText("Invalid pass")));
+
+        try {
+            Thread.sleep(SLEEPTIME);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText3 = onView(
+                withId(R.id.password));
+        appCompatEditText3.perform(scrollTo(), replaceText("password"), closeSoftKeyboard());
+
+        assertEquals(cancel, false);
     }
 }

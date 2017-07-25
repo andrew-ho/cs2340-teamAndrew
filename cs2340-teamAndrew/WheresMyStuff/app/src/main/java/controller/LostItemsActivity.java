@@ -43,16 +43,16 @@ import cs2340teamandrew.wheresmystuff.R;
 public class LostItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
-    private ListView lostList;
+
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
-    private Button back;
+
     //private ArrayList<String> showitems = new ArrayList<String>();
     private final ArrayList<LostItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
-    private SearchView searchView;
+
     private final MapsActivity map = new MapsActivity();
     //Location
     LatLng latLng;
@@ -106,6 +106,9 @@ public class LostItemsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView lostList;
+        Button back;
+        SearchView searchView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_item);
 

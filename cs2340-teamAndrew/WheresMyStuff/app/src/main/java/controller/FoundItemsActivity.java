@@ -39,18 +39,19 @@ import model.FoundItem;
 public class FoundItemsActivity extends AppCompatActivity {
 
     private FloatingActionButton itemAdder;
-    private ListView foundList;
-    private Button back;
+
     private final ArrayList<FoundItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
-    private DatabaseReference ref;
+
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private SearchView searchView;
+
 
     /**
      * class of ItemAdapter that holds and display an array of FoundItem
      */
     class ItemAdapter extends ArrayAdapter<FoundItem> {
+
+
         ItemAdapter(Context context, List<FoundItem> list) {
             super(context,0,list);
         }
@@ -97,6 +98,11 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseReference ref;
+        ListView foundList;
+        Button back;
+
+        SearchView searchView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_found_items);
 

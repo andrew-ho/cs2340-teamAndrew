@@ -53,8 +53,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+
 
     private boolean mSelectUser;
     private boolean mSelectAdmin;
@@ -91,6 +90,8 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
+        View mProgressView;
+        View mLoginFormView;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen);
 

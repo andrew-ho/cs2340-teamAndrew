@@ -45,10 +45,10 @@ public class FoundItemsActivity extends AppCompatActivity {
     private FloatingActionButton itemAdder;
     private ListView foundList;
     private Button back;
-    private ArrayList<FoundItem> daList = new ArrayList<>();
+    final private ArrayList<FoundItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    final private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private SearchView searchView;
 
     /**

@@ -56,16 +56,19 @@ public class FoundItemsActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             FoundItem found = getItem(position);
+            View used;
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
+                used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
+            } else {
+                used = convertView;
             }
 
-            TextView itemName = (TextView) convertView.findViewById(R.id.item_name);
-            ImageView itemImage = (ImageView) convertView.findViewById(R.id.item_picture);
+            TextView itemName = used.findViewById(R.id.item_name);
+            ImageView itemImage = used.findViewById(R.id.item_picture);
 
             itemName.setText(found.getName());
             itemImage.setImageResource(R.mipmap.default_image);
-            return convertView;
+            return used;
         }
     }
 
@@ -108,7 +111,7 @@ public class FoundItemsActivity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets listview
-        foundList = (ListView) findViewById(R.id.FoundItemList);
+        foundList = findViewById(R.id.FoundItemList);
         foundList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -131,7 +134,7 @@ public class FoundItemsActivity extends AppCompatActivity {
         });
 
         //sets logout
-        back = (Button) findViewById(R.id.Back);
+        back = findViewById(R.id.Back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,7 +150,7 @@ public class FoundItemsActivity extends AppCompatActivity {
 
 
         // search through found items
-        searchView = (SearchView) findViewById(R.id.search_bar_foundItems);
+        searchView = findViewById(R.id.search_bar_foundItems);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
 

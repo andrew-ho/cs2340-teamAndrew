@@ -62,16 +62,19 @@ public class LostItemsActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LostItem lost = getItem(position);
+            View used;
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
+                used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
+            } else {
+                used = convertView;
             }
 
-            TextView itemName = (TextView) convertView.findViewById(R.id.item_name);
-            ImageView itemImage = (ImageView) convertView.findViewById(R.id.item_picture);
+            TextView itemName =  used.findViewById(R.id.item_name);
+            ImageView itemImage = used.findViewById(R.id.item_picture);
 
             itemName.setText(lost.getName());
             itemImage.setImageResource(R.mipmap.default_image);
-            return convertView;
+            return used;
         }
     }
 

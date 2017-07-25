@@ -87,11 +87,11 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
         // Set up the login form.
-        mName = (EditText) findViewById(R.id.NameOfItem);
+        mName = findViewById(R.id.NameOfItem);
 
-        mDescription = (EditText) findViewById(R.id.ItemDescription);
+        mDescription = findViewById(R.id.ItemDescription);
 
-        mCancel = (Button) findViewById(R.id.CancelItemList);
+        mCancel = findViewById(R.id.CancelItemList);
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +106,7 @@ public class AddItemActivity extends AppCompatActivity {
                 id);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-             mFound = (RadioButton) findViewById(R.id.Found);
+             mFound = findViewById(R.id.Found);
              mFound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +114,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-      mLost = (RadioButton) findViewById(R.id.Lost);
+      mLost = findViewById(R.id.Lost);
         mLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +151,7 @@ public class AddItemActivity extends AppCompatActivity {
                     LocationManager.GPS_PROVIDER, TIMEOUT, 10, locationListener);
         }
 
-        mAdd = (Button) findViewById(R.id.ListItemButton);
+        mAdd = findViewById(R.id.ListItemButton);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

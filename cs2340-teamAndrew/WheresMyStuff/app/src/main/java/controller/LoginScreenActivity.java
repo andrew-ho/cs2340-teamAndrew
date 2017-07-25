@@ -102,9 +102,9 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
         mAuth = FirebaseAuth.getInstance();
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -116,7 +116,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        Button mExitButton = (Button) findViewById(R.id.ExitApp);
+        Button mExitButton = findViewById(R.id.ExitApp);
         mExitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

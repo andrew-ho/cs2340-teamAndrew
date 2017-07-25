@@ -22,7 +22,7 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        Button LostItemsButton = (Button) findViewById(R.id.LostItems);
+        Button LostItemsButton = findViewById(R.id.LostItems);
         LostItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +31,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        Button FoundItemsButton = (Button) findViewById(R.id.FoundItems);
+        Button FoundItemsButton = findViewById(R.id.FoundItems);
         FoundItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +40,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        Button AddItemButton = (Button) findViewById(R.id.AddItem);
+        Button AddItemButton = findViewById(R.id.AddItem);
         AddItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +49,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
-        Button MapScreenButton = (Button) findViewById(R.id.MapScreen);
+        Button MapScreenButton = findViewById(R.id.MapScreen);
         MapScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

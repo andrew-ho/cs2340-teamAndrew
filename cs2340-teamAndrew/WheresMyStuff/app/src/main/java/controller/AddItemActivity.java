@@ -72,7 +72,7 @@ public class AddItemActivity extends AppCompatActivity {
     {
 
         String permission = "android.permission.ACCESS_FINE_LOCATION";
-        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
+        @SuppressWarnings("ChainedMethodCall") int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
 
@@ -122,6 +122,7 @@ public class AddItemActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                //noinspection ChainedMethodCall
                 Toast.makeText(getApplicationContext(), "" + latitude, Toast.LENGTH_LONG).show();
             }
 
@@ -150,29 +151,33 @@ public class AddItemActivity extends AppCompatActivity {
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String name = mName.getText().toString();
+                @SuppressWarnings("ChainedMethodCall") final String name = mName.getText().toString();
                 final Editable description = mDescription.getText();
                 //LostItems item = new LostItems(name,description.toString());
-                String key = mMyRef.child("Lostitems").push().getKey();
+                @SuppressWarnings("ChainedMethodCall") String key = mMyRef.child("Lostitems").push().getKey();
                 assert user != null;
                 String userName = user.getEmail();
                 String destination;
                 Item item;
                 if (foundLost) {
                     destination = "Founditems";
+                    //noinspection ChainedMethodCall,ChainedMethodCall
                     key = mMyRef.child(destination).push().getKey();
                     item = new FoundItem(
                             name, description.toString(),key, userName);
                 } else {
                     destination = "Lostitems";
+                    //noinspection ChainedMethodCall,ChainedMethodCall
                     key = mMyRef.child(destination).push().getKey();
                     item = new LostItem(
                             name, description.toString(), key, userName);
                 }
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
+                //noinspection ChainedMethodCall,ChainedMethodCall
                 mMyRef.child(destination).child(key).setValue(item);
                 LocationItems locate = new LocationItems(latitude, longitude);
                 //LocationItems locate = new LocationItems(latitude, longitude);
+                //noinspection ChainedMethodCall,ChainedMethodCall,ChainedMethodCall
                 mMyRef.child(destination).child(key).child("Location").setValue(locate);
                 //mLocationManager.requestLocationUpdates(
                 //  LocationManager.GPS_PROVIDER, 2000, 10, locationListener);

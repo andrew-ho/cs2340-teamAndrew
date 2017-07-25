@@ -67,6 +67,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
      * @param password  user's account password
      */
     private void createAccount(String email, String password) {
+        //noinspection ChainedMethodCall
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -74,10 +75,12 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //FirebaseUser user = mAuth.getCurrentUser();
+                            //noinspection ChainedMethodCall
                             Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user
+                            //noinspection ChainedMethodCall
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -96,17 +99,17 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         setContentView(R.layout.activity_register_screen);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         //populateAutoComplete();
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                return id == R.id.login || id == EditorInfo.IME_NULL;
+                return ((id == R.id.login) || (id == EditorInfo.IME_NULL));
             }
         });
         mAuth = FirebaseAuth.getInstance();
-        Button mExitButton = (Button) findViewById(R.id.ExitApp);
+        Button mExitButton = findViewById(R.id.ExitApp);
         mExitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +117,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             }
         });
 
-        Button mRegisterButton = (Button) findViewById(R.id.registration);
+        Button mRegisterButton = findViewById(R.id.registration);
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +125,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             }
         });
 
-        RadioButton mUserButton = (RadioButton) findViewById(R.id.User);
+        RadioButton mUserButton = findViewById(R.id.User);
         mUserButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +133,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
             }
         });
 
-        RadioButton mAdminButton = (RadioButton) findViewById(R.id.Admin);
+        RadioButton mAdminButton = findViewById(R.id.Admin);
         mAdminButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,8 +148,8 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
      * check for valid password, then make an account if the password is valid
      */
     private void attemptRegistration() {
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        @SuppressWarnings("ChainedMethodCall") String email = mEmailView.getText().toString();
+        @SuppressWarnings("ChainedMethodCall") String password = mPasswordView.getText().toString();
 
         // Check for a valid password, if the user entered one.
         if (!isPasswordValid(password)) {

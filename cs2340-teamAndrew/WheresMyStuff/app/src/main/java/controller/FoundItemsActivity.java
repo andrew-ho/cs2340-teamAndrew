@@ -60,6 +60,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             FoundItem found = getItem(position);
             View used;
             if (convertView == null) {
+                //noinspection ChainedMethodCall
                 used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
             } else {
                 used = convertView;
@@ -82,17 +83,25 @@ public class FoundItemsActivity extends AppCompatActivity {
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
             FoundItem item = new FoundItem();
+            //noinspection ChainedMethodCall
             item.setName(dataSnapshot.getValue(FoundItem.class).getName());
+            //noinspection ChainedMethodCall
             item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
+            //noinspection ChainedMethodCall
             item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
+            //noinspection ChainedMethodCall
             item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
             FoundItem item = new FoundItem();
+            //noinspection ChainedMethodCall
             item.setName(dataSnapshot.getValue(FoundItem.class).getName());
+            //noinspection ChainedMethodCall
             item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
+            //noinspection ChainedMethodCall
             item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
+            //noinspection ChainedMethodCall
             item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
@@ -112,6 +121,7 @@ public class FoundItemsActivity extends AppCompatActivity {
         //get user data
         //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems")
         //  .child(user.getUid());
+        //noinspection ChainedMethodCall,ChainedMethodCall
         ref = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets listview
@@ -130,7 +140,7 @@ public class FoundItemsActivity extends AppCompatActivity {
                 daList.remove(i);
                 adapter.notifyDataSetChanged();*/
                 FoundItem item = (FoundItem) adapterView.getItemAtPosition(i);
-                AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
+                @SuppressWarnings("ChainedMethodCall") AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                 alertDialog.setTitle("A found item");
                 alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
                     + "\n" + item.getUserName() + " has found this item!");
@@ -164,11 +174,12 @@ public class FoundItemsActivity extends AppCompatActivity {
                 boolean foundItem = false;
                 for(int i=0; i<daList.size(); i++) {
                     final FoundItem item = daList.get(i);
+                    //noinspection ChainedMethodCall
                     if (item.getName().equals(query)) {
                         Log.d("FoundItemActivity", "found item");
                         foundItem = true;
 
-                        AlertDialog alertDialog =
+                        @SuppressWarnings("ChainedMethodCall") AlertDialog alertDialog =
                                 new AlertDialog.Builder(FoundItemsActivity.this).create();
                         alertDialog.setTitle("A found item");
                         alertDialog.setMessage(item.getName() + "\n" + item.getDescription()

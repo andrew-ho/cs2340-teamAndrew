@@ -3,6 +3,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0">
       <entry_point TYPE="method" FQNAME="model.Admin Admin(java.lang.String username, java.lang.String password)" />
+      <entry_point TYPE="field" FQNAME="controller.RegisterScreenActivity mSelectUser" />
+      <entry_point TYPE="field" FQNAME="controller.RegisterScreenActivity mSelectAdmin" />
+      <entry_point TYPE="method" FQNAME="controller.RegisterScreenActivity boolean isEmailValid(java.lang.String email)" />
     </entry_points>
   </component>
   <component name="NullableNotNullManager">

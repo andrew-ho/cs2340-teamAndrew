@@ -66,6 +66,7 @@ public class LostItemsActivity extends AppCompatActivity {
             LostItem lost = getItem(position);
             View used;
             if (convertView == null) {
+                //noinspection ChainedMethodCall
                 used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
             } else {
                 used = convertView;
@@ -87,17 +88,25 @@ public class LostItemsActivity extends AppCompatActivity {
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
             LostItem item = new LostItem();
+            //noinspection ChainedMethodCall
             item.setName(dataSnapshot.getValue(LostItem.class).getName());
+            //noinspection ChainedMethodCall
             item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
+            //noinspection ChainedMethodCall
             item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
+            //noinspection ChainedMethodCall
             item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
             LostItem item = new LostItem();
+            //noinspection ChainedMethodCall
             item.setName(dataSnapshot.getValue(LostItem.class).getName());
+            //noinspection ChainedMethodCall
             item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
+            //noinspection ChainedMethodCall
             item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
+            //noinspection ChainedMethodCall
             item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
             daList.add(item);
             adapter.notifyDataSetChanged();
@@ -115,11 +124,13 @@ public class LostItemsActivity extends AppCompatActivity {
         //get user data
         //ref = FirebaseDatabase.getInstance()
         //  .getReference().child("Lostitems").child(user.getUid());
+        //noinspection ChainedMethodCall,ChainedMethodCall
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+        //noinspection ChainedMethodCall,ChainedMethodCall
         foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets list view
-        lostList = (ListView) findViewById(R.id.LostItemList);
+        lostList = findViewById(R.id.LostItemList);
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -133,7 +144,9 @@ public class LostItemsActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //noinspection ChainedMethodCall
                                 foundRef.child(item.getKey()).setValue(item);
+                                //noinspection ChainedMethodCall
                                 ref.child(item.getKey()).removeValue();
                                 daList.remove(position);
                                 adapter.notifyDataSetChanged();
@@ -148,7 +161,7 @@ public class LostItemsActivity extends AppCompatActivity {
         });
 
         //sets logout
-        back = (Button) findViewById(R.id.Back);
+        back = findViewById(R.id.Back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +176,7 @@ public class LostItemsActivity extends AppCompatActivity {
         lostList.setAdapter(adapter);
 
         // search
-        searchView = (SearchView) findViewById(R.id.search_bar_lostItems);
+        searchView = findViewById(R.id.search_bar_lostItems);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
 
@@ -173,6 +186,7 @@ public class LostItemsActivity extends AppCompatActivity {
                 for(int i=0; i < daList.size(); i++) {
                     final LostItem item = daList.get(i);
                     final int position = i;
+                    //noinspection ChainedMethodCall
                     if (item.getName().equals(query)) {
                         Log.d("LostItemsActivity", "found item");
                         foundItem = true;
@@ -186,7 +200,9 @@ public class LostItemsActivity extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        //noinspection ChainedMethodCall
                                         foundRef.child(item.getKey()).setValue(item);
+                                        //noinspection ChainedMethodCall
                                         ref.child(item.getKey()).removeValue();
                                         daList.remove(position);
                                         adapter.notifyDataSetChanged();

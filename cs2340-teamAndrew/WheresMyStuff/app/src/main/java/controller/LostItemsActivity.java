@@ -49,7 +49,7 @@ public class LostItemsActivity extends AppCompatActivity {
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private Button back;
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private ArrayList<LostItem> daList = new ArrayList<LostItem>();
+    private ArrayList<LostItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -16,9 +16,6 @@ public class LostItem extends Item {
     /**
      * empty constructor required for firebase
      */
-    /**
-     * empty constructor required for firebase
-     */
     public LostItem(){
 
     }

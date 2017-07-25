@@ -42,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
     private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
-    private Map<Marker, Item> hash = new HashMap<Marker, Item>();
+    private Map<Marker, Item> hash = new HashMap<>();
 
 
     @Override

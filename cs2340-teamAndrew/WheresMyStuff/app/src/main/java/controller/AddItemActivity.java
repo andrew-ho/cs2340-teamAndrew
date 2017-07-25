@@ -54,7 +54,8 @@ public class AddItemActivity extends AppCompatActivity {
     private double latitude; // latitude
     private double longitude; // longitude
     private LocationManager mLocationManager;
-    /*private LocationManager lm = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
+    /*private LocationManager lm
+        = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
     private Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     private double latitude = location.getLatitude();
     private double longitude = location.getLongitude();
@@ -148,7 +149,8 @@ public class AddItemActivity extends AppCompatActivity {
         };
         final int TIMEOUT = 2000;
         if (checkWriteExternalPermission()) {
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, TIMEOUT, 10, locationListener);
+            mLocationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, TIMEOUT, 10, locationListener);
         }
 
         mAdd = (Button) findViewById(R.id.ListItemButton);
@@ -160,26 +162,31 @@ public class AddItemActivity extends AppCompatActivity {
                 //LostItems item = new LostItems(name,description.toString());
                 String key = mMyRef.child("Lostitems").push().getKey();
                 String userName = user.getEmail();
-                                String destination;
-                                Item item;
-                                if (foundLost) {
-                                    destination = "Founditems";
-                                    key = mMyRef.child(destination).push().getKey();
-                                    item = new FoundItem(name, description.toString(),key, userName);
-                              } else {
-                                    destination = "Lostitems";
-                                    key = mMyRef.child(destination).push().getKey();
-                                    item = new LostItem(name, description.toString(), key, userName);
-                                }
+                String destination;
+                Item item;
+                if (foundLost) {
+                    destination = "Founditems";
+                    key = mMyRef.child(destination).push().getKey();
+                    item = new FoundItem(
+                            name, description.toString(),key, userName);
+                } else {
+                    destination = "Lostitems";
+                    key = mMyRef.child(destination).push().getKey();
+                    item = new LostItem(
+                            name, description.toString(), key, userName);
+                }
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
                 mMyRef.child(destination).child(key).setValue(item);
                 LocationItems locate = new LocationItems(latitude, longitude);
                 //LocationItems locate = new LocationItems(latitude, longitude);
                 mMyRef.child(destination).child(key).child("Location").setValue(locate);
-                //mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+                //mLocationManager.requestLocationUpdates(
+                //  LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
                 //Toast.makeText(getApplicationContext(), "got here", Toast.LENGTH_LONG).show();
-                //mMyRef.child(destination).child(key).child("Location").child("Latitude").setValue(latitude);
-                //mMyRef.child(destination).child(key).child("Location").child("Longitude").setValue(longitude);
+                //mMyRef.child(destination).child(key).child(
+                //  "Location").child("Latitude").setValue(latitude);
+                //mMyRef.child(destination).child(key).child(
+                //  "Location").child("Longitude").setValue(longitude);
                 finish();
             }
         });

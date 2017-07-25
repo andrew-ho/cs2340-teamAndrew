@@ -73,8 +73,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     LocationItems locate = new LocationItems();
-                    locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
-                    locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    if (data.child("Location").exists()) {
+                        locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
+                        locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                    }
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
                     LostItem item = new LostItem();
                     item.setName(data.getValue(LostItem.class).getName());

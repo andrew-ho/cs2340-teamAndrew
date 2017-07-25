@@ -1,10 +1,7 @@
 package cs2340teamandrew.wheresmystuff;
-/**
- * Tests searching for found items.
- * @author Andrew Tuttle atuttle7
- */
 
-import android.support.test.espresso.ViewAction;
+
+
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -32,9 +29,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-
+/**
+ * Tests searching for found items.
+ * @author Andrew Tuttle atuttle7
+ */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
+
 public class FoundItemsSearchTest {
 
     @Rule

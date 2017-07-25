@@ -1,9 +1,7 @@
 package model;
 
-import android.content.ClipData;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 
 /**
  * @author team11

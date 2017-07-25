@@ -10,12 +10,12 @@ import java.util.List;
  */
 
 public class User {
-    private String username;
-    private String password;
+    final private String username;
+    final private String password;
     protected String type;
   
-    private static Collection<User> masterList = new ArrayList<>();
-    private ArrayList<LostItem> myLostItems = new ArrayList<>();
+    final private static Collection<User> masterList = new ArrayList<>();
+    final private ArrayList<LostItem> myLostItems = new ArrayList<>();
 
     /**
      * constructor for user

@@ -114,7 +114,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if ( (id == R.id.login) || (id == EditorInfo.IME_NULL)) {
                     attemptLogin();
                     return true;
                 }
@@ -186,7 +186,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if ((grantResults.length == 1)
+                    && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 populateAutoComplete();
             }
         }

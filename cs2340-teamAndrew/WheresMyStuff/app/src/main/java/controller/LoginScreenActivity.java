@@ -293,7 +293,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
     /**
      * add emails to AutoCompleteTextView
-     * @param emailAddressCollection
+     * @param emailAddressCollection a list of the email addresses
      */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.

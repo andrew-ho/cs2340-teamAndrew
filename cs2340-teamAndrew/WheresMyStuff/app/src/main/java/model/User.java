@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**
@@ -13,8 +11,9 @@ public class User {
     private final String password;
     protected String type;
   
-    private static final Collection<User> masterList = new ArrayList<>();
-    // --Commented out by Inspection (7/25/2017 1:48 PM):private final ArrayList<LostItem> myLostItems = new ArrayList<>();
+    //private static final Collection<User> masterList = new ArrayList<>();
+    // --Commented out by Inspection (7/25/2017 1:48 PM):
+    //  private final ArrayList<LostItem> myLostItems = new ArrayList<>();
 
 
     /**
@@ -26,7 +25,7 @@ public class User {
         this.password = password;
         this.username = username;
         this.type = "User";
-        masterList.add(this);
+        //masterList.add(this);
     }
 
     /**

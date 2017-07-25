@@ -51,7 +51,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    // --Commented out by Inspection (7/25/2017 1:47 PM):private final User dummy = new User("test@test.com","password");
+    // --Commented out by Inspection (7/25/2017 1:47 PM):
+    // private final User dummy = new User("test@test.com","password");
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -59,8 +60,6 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     private FirebaseAuth mAuth;
 
@@ -139,9 +138,10 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                 attemptLogin();
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        //View mProgressView;
+        //View mLoginFormView;
+        //mLoginFormView = findViewById(R.id.login_form);
+        //mProgressView = findViewById(R.id.login_progress);
     }
 
 

@@ -6,6 +6,11 @@
       <entry_point TYPE="field" FQNAME="controller.RegisterScreenActivity mSelectUser" />
       <entry_point TYPE="field" FQNAME="controller.RegisterScreenActivity mSelectAdmin" />
       <entry_point TYPE="method" FQNAME="controller.RegisterScreenActivity boolean isEmailValid(java.lang.String email)" />
+      <entry_point TYPE="method" FQNAME="model.Item void setUserName(java.lang.String userName)" />
+      <entry_point TYPE="method" FQNAME="model.Item void setKey(java.lang.String key)" />
+      <entry_point TYPE="method" FQNAME="model.Item Item(java.lang.String name, java.lang.String description, java.lang.String key, java.lang.String userName, android.widget.ImageView image)" />
+      <entry_point TYPE="method" FQNAME="model.Item android.widget.ImageView getPicture()" />
+      <entry_point TYPE="field" FQNAME="model.Item defaultImage" />
     </entry_points>
   </component>
   <component name="NullableNotNullManager">

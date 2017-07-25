@@ -23,7 +23,7 @@ public abstract class Item {
      * gets username
      * @return username
      */
-    public String getUserName() {
+    private String getUserName() {
         return userName;
     }
 
@@ -96,7 +96,7 @@ public abstract class Item {
     /**
      * empty constructor required for firebase
      */
-    public Item(){
+    Item(){
 
     }
 
@@ -109,9 +109,8 @@ public abstract class Item {
         String name = this.getName();
         String description = this.getDescription();
         String username = this.getUserName();
-        String message = name + "\n" + description
+        return name + "\n" + description
                 + "\n" + username + " has found this item!";
-        return message;
     }
 
 // --Commented out by Inspection START (7/25/2017 1:46 PM):

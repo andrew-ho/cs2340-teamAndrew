@@ -48,7 +48,6 @@ public class LostItemsActivity extends AppCompatActivity {
     private DatabaseReference ref;
     //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
-    private Item item;
 
     //private final MapsActivity map = new MapsActivity();
     //Location
@@ -63,7 +62,7 @@ public class LostItemsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            item = getItem(position);
+            Item item = getItem(position);
             View used;
             if (convertView == null) {
                 used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
@@ -74,6 +73,7 @@ public class LostItemsActivity extends AppCompatActivity {
             TextView itemName =  used.findViewById(R.id.item_name);
             ImageView itemImage = used.findViewById(R.id.item_picture);
 
+            assert item != null;
             itemName.setText(item.getName());
             itemImage.setImageResource(R.mipmap.default_image);
             return used;
@@ -110,7 +110,7 @@ public class LostItemsActivity extends AppCompatActivity {
         foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets list view
-        lostList = (ListView) findViewById(R.id.LostItemList);
+        lostList = findViewById(R.id.LostItemList);
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -139,7 +139,7 @@ public class LostItemsActivity extends AppCompatActivity {
         });
 
         //sets logout
-        back = (Button) findViewById(R.id.Back);
+        back = findViewById(R.id.Back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +154,7 @@ public class LostItemsActivity extends AppCompatActivity {
         lostList.setAdapter(adapter);
 
         // search
-        searchView = (SearchView) findViewById(R.id.search_bar_lostItems);
+        searchView = findViewById(R.id.search_bar_lostItems);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
 

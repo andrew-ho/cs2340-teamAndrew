@@ -130,7 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker.showInfoWindow();
         // Check if a click count was set, then display the click count.
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        boolean found = item instanceof FoundItem;
+        boolean found = item.getClass() == FoundItem.class;
         builder1.setMessage(found ? "Found item:\n" + item.getName() + "\n" + item.getDescription()
                 : "Lost item:\n" + item.getName() + "\n" + item.getDescription());
         builder1.setCancelable(true);

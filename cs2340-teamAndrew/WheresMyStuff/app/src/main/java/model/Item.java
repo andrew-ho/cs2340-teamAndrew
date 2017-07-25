@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 /**
- * Created by Andrew Tuttle on 6/30/2017.
+ * Created by Andrew Tuttle.
  */
 
 public abstract class Item {

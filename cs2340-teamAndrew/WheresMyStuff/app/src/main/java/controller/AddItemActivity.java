@@ -100,9 +100,11 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
+        final int id = 123;
+
         ActivityCompat.requestPermissions(AddItemActivity.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                123);
+                id);
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
              mFound = (RadioButton) findViewById(R.id.Found);
@@ -144,8 +146,9 @@ public class AddItemActivity extends AppCompatActivity {
 
             }
         };
+        final int TIMEOUT = 2000;
         if (checkWriteExternalPermission()) {
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, TIMEOUT, 10, locationListener);
         }
 
         mAdd = (Button) findViewById(R.id.ListItemButton);

@@ -116,7 +116,7 @@ public class LostItemsActivity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
         foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
-        //sets listview
+        //sets list view
         lostList = (ListView) findViewById(R.id.LostItemList);
         lostList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

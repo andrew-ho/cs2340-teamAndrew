@@ -45,8 +45,9 @@ public class FoundItemsSearchTest {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        final int SLEEPTIME = 2000;
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -69,7 +70,7 @@ public class FoundItemsSearchTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -82,7 +83,7 @@ public class FoundItemsSearchTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -135,7 +136,7 @@ public class FoundItemsSearchTest {
         pressBack();
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -148,7 +149,7 @@ public class FoundItemsSearchTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -159,7 +160,7 @@ public class FoundItemsSearchTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(SLEEPTIME);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

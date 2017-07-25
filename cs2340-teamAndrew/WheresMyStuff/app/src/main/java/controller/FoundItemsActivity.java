@@ -55,7 +55,7 @@ public class FoundItemsActivity extends AppCompatActivity {
      * class of ItemAdapter that holds and display an array of FoundItem
      */
     class ItemAdapter extends ArrayAdapter<FoundItem> {
-        ItemAdapter(Context context, ArrayList<FoundItem> list) {
+        ItemAdapter(Context context, List<FoundItem> list) {
             super(context,0,list);
         }
 
@@ -155,7 +155,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 boolean foundItem = false;
-                for(int i=0;i<daList.size();i++) {
+                for(int i=0; i<daList.size(); i++) {
                     final FoundItem item = daList.get(i);
                     final int position = i;
                     if (item.getName().equals(query)) {

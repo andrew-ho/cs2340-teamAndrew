@@ -1,11 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 /**
- * Created by andre on 6/14/2017.
+ * Created by Andrew Tuttle.
  */
 
 public class User {
@@ -13,7 +14,7 @@ public class User {
     private String password;
     protected String type;
   
-    private static List<User> masterList = new ArrayList<>();
+    private static Collection<User> masterList = new ArrayList<>();
     private ArrayList<LostItem> myLostItems = new ArrayList<>();
 
     /**

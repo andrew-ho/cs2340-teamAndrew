@@ -57,8 +57,9 @@ public class PasswordTest {
 
         // Test1: password too short
         // press register button
+        final int sleepTime = 500;
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -69,7 +70,7 @@ public class PasswordTest {
 
         // input email and password
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -83,7 +84,7 @@ public class PasswordTest {
 
         // press register button again
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -92,7 +93,7 @@ public class PasswordTest {
 
         // check error message
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -103,7 +104,7 @@ public class PasswordTest {
 
         // close
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -112,15 +113,15 @@ public class PasswordTest {
         // test2: no password
         // press register button
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         register.perform(scrollTo(), click());
-
+        final int LONGSLEEP = 2000;
         try {
-            Thread.sleep(2000);
+            Thread.sleep(LONGSLEEP);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -133,7 +134,7 @@ public class PasswordTest {
 
         // Test 3: valid password
         try {
-            Thread.sleep(500);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -146,7 +147,7 @@ public class PasswordTest {
         register.perform(scrollTo(), click());
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(LONGSLEEP);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

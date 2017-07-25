@@ -53,7 +53,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    private User dummy = new User("test@test.com","password");
+    final private User dummy = new User("test@test.com","password");
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -110,7 +110,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if ( (id == R.id.login) || (id == EditorInfo.IME_NULL)) {
                     attemptLogin();
                     return true;
                 }
@@ -182,7 +182,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if ((grantResults.length == 1)
+                    && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 populateAutoComplete();
             }
         }

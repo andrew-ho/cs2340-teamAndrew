@@ -157,7 +157,6 @@ public class FoundItemsActivity extends AppCompatActivity {
                 boolean foundItem = false;
                 for(int i=0; i<daList.size(); i++) {
                     final FoundItem item = daList.get(i);
-                    final int position = i;
                     if (item.getName().equals(query)) {
                         Log.d("FoundItemActivity", "found item");
                         foundItem = true;

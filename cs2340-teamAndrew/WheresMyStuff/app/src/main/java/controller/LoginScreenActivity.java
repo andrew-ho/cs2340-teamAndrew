@@ -72,28 +72,6 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
 
     /**
-     * Method for the encryption
-     * @param password the password
-     * @return string
-     */
-    final static int ENCRYPT = 10000;
-
-
-    /**
-     * Method for handling encryption
-     * @param password the password
-     * @return string
-     */
-    public static String encryptMessage(String password) {
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("AES");
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-        return null;
-    }
-
-    /**
      * signs in user with email and password
      * @param email email of user
      * @param password password of user
@@ -105,7 +83,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            //FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(getBaseContext(), HomePageActivity.class);
                             startActivity(intent);
 
@@ -235,8 +213,6 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
-        View focusView = null;
         signIn(email, password);
     }
 

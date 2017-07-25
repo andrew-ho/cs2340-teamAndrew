@@ -51,7 +51,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    // --Commented out by Inspection (7/25/2017 1:47 PM):private final User dummy = new User("test@test.com","password");
+    // --Commented out by Inspection (7/25/2017 1:47 PM):
+    // private final User dummy = new User("test@test.com","password");
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -59,8 +60,6 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     private FirebaseAuth mAuth;
 
@@ -71,6 +70,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      * @param password password of user
      */
     private void signIn(String email, String password) {
+        //noinspection ChainedMethodCall
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,6 +84,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
                         } else {
                             // If sign in fails, display a message to the user.
 
+                            //noinspection ChainedMethodCall
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
@@ -124,7 +125,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        Button mRegisterButton = (Button) findViewById(R.id.registration);
+        Button mRegisterButton = findViewById(R.id.registration);
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,16 +133,17 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton =  findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        //View mProgressView;
+        //View mLoginFormView;
+        //mLoginFormView = findViewById(R.id.login_form);
+        //mProgressView = findViewById(R.id.login_progress);
     }
 
 
@@ -150,6 +152,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             return;
         }
 
+        //noinspection ChainedMethodCall
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -162,6 +165,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
+            //noinspection ChainedMethodCall
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
@@ -211,8 +215,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        @SuppressWarnings("ChainedMethodCall") String email = mEmailView.getText().toString();
+        @SuppressWarnings("ChainedMethodCall") String password = mPasswordView.getText().toString();
 
         signIn(email, password);
     }

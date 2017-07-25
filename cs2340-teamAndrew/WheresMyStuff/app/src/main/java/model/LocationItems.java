@@ -9,6 +9,10 @@ package model;
 public class LocationItems {
     private double latitude;
     private double longitude;
+
+    /**
+     * Default Constructor.
+     */
     public LocationItems() {
 
     }

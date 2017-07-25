@@ -34,13 +34,15 @@ import static org.hamcrest.Matchers.allOf;
 public class CreateAccountTest {
 
     @Rule
-    public ActivityTestRule<LoginScreenActivity> mActivityTestRule = new ActivityTestRule<>(LoginScreenActivity.class);
+    public ActivityTestRule<LoginScreenActivity> mActivityTestRule
+            = new ActivityTestRule<>(LoginScreenActivity.class);
 
     @Test
     public void createAccountTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        // https://google.github.io/android-testing-support-library/
+        //  docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {
@@ -55,7 +57,8 @@ public class CreateAccountTest {
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        // https://google.github.io/android-testing-support-library
+        //  /docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(3530796);
         } catch (InterruptedException e) {
@@ -64,7 +67,8 @@ public class CreateAccountTest {
 
         ViewInteraction appCompatAutoCompleteTextView = onView(
                 withId(R.id.email));
-        appCompatAutoCompleteTextView.perform(scrollTo(), replaceText("1234@yo.com"), closeSoftKeyboard());
+        appCompatAutoCompleteTextView.perform(scrollTo(),
+                replaceText("1234@yo.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText = onView(
                 withId(R.id.password));

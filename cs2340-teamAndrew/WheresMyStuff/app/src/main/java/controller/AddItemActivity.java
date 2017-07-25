@@ -38,11 +38,6 @@ public class AddItemActivity extends AppCompatActivity {
     // UI references.
     private EditText mName;
     private EditText mDescription;
-    private Button mCancel;
-    private Button mAdd;
-    //private LocationManager locationManager;
-    private RadioButton mLost;
-    private RadioButton mFound;
     private boolean foundLost;
     private final DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
     //private FirebaseAuth mAuth;
@@ -51,7 +46,7 @@ public class AddItemActivity extends AppCompatActivity {
     // --Commented out by Inspection (7/25/2017 1:46 PM):private Location location; // location
     private double latitude; // latitude
     private double longitude; // longitude
-    private LocationManager mLocationManager;
+
     /*private LocationManager lm
         = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
     private Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -77,7 +72,7 @@ public class AddItemActivity extends AppCompatActivity {
     {
 
         String permission = "android.permission.ACCESS_FINE_LOCATION";
-        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
+        @SuppressWarnings("ChainedMethodCall") int res = getApplicationContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
 
@@ -91,7 +86,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         mDescription = findViewById(R.id.ItemDescription);
 
-        mCancel = findViewById(R.id.CancelItemList);
+        Button mCancel = findViewById(R.id.CancelItemList);
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,9 +99,9 @@ public class AddItemActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(AddItemActivity.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 id);
-        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-             mFound = findViewById(R.id.Found);
+        RadioButton mFound = findViewById(R.id.Found);
              mFound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +109,7 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-      mLost = findViewById(R.id.Lost);
+        RadioButton mLost = findViewById(R.id.Lost);
         mLost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +122,7 @@ public class AddItemActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                //noinspection ChainedMethodCall
                 Toast.makeText(getApplicationContext(), "" + latitude, Toast.LENGTH_LONG).show();
             }
 
@@ -151,32 +147,37 @@ public class AddItemActivity extends AppCompatActivity {
                     LocationManager.GPS_PROVIDER, TIMEOUT, 10, locationListener);
         }
 
-        mAdd = findViewById(R.id.ListItemButton);
+        Button mAdd = findViewById(R.id.ListItemButton);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String name = mName.getText().toString();
+                @SuppressWarnings("ChainedMethodCall") final String name = mName.getText().toString();
                 final Editable description = mDescription.getText();
                 //LostItems item = new LostItems(name,description.toString());
-                String key = mMyRef.child("Lostitems").push().getKey();
+                @SuppressWarnings("ChainedMethodCall") String key = mMyRef.child("Lostitems").push().getKey();
+                assert user != null;
                 String userName = user.getEmail();
                 String destination;
                 Item item;
                 if (foundLost) {
                     destination = "Founditems";
+                    //noinspection ChainedMethodCall,ChainedMethodCall
                     key = mMyRef.child(destination).push().getKey();
                     item = new FoundItem(
                             name, description.toString(),key, userName);
                 } else {
                     destination = "Lostitems";
+                    //noinspection ChainedMethodCall,ChainedMethodCall
                     key = mMyRef.child(destination).push().getKey();
                     item = new LostItem(
                             name, description.toString(), key, userName);
                 }
                 //mMyRef.child("Lostitems").child(user.getUid()).child(key).setValue(item);
+                //noinspection ChainedMethodCall,ChainedMethodCall
                 mMyRef.child(destination).child(key).setValue(item);
                 LocationItems locate = new LocationItems(latitude, longitude);
                 //LocationItems locate = new LocationItems(latitude, longitude);
+                //noinspection ChainedMethodCall,ChainedMethodCall,ChainedMethodCall
                 mMyRef.child(destination).child(key).child("Location").setValue(locate);
                 //mLocationManager.requestLocationUpdates(
                 //  LocationManager.GPS_PROVIDER, 2000, 10, locationListener);

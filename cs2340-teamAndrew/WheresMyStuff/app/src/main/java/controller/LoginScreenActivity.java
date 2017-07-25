@@ -1,7 +1,6 @@
 package controller;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -37,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs2340teamandrew.wheresmystuff.R;
-import model.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

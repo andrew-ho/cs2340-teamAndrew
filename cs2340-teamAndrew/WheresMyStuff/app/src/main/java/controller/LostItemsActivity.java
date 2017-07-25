@@ -3,7 +3,6 @@ package controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,10 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.SearchView;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +37,7 @@ import cs2340teamandrew.wheresmystuff.R;
  */
 public class LostItemsActivity extends AppCompatActivity {
 
-    private FloatingActionButton itemAdder;
+    //private FloatingActionButton itemAdder;
 
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
 
@@ -50,12 +45,12 @@ public class LostItemsActivity extends AppCompatActivity {
     private final ArrayList<LostItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
 
-    private final MapsActivity map = new MapsActivity();
+    //private final MapsActivity map = new MapsActivity();
     //Location
-    LatLng latLng;
+    //LatLng latLng;
     /**
      * class of ItemAdapter that holds and display an array of LostItem
      */

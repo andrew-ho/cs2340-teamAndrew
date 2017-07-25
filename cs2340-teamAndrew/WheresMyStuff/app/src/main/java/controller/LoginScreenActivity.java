@@ -176,6 +176,12 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         return false;
     }
 
+    /**
+     * result of permission request
+     * @param requestCode code to be requested
+     * @param permissions   string of permissions
+     * @param grantResults  results of the permissions
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -250,6 +256,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 //        }
 //    }
 // --Commented out by Inspection STOP (7/25/2017 1:47 PM)
+
 
 
     @Override

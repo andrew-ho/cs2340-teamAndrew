@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Item;
 import model.LostItem;
 
 import cs2340teamandrew.wheresmystuff.R;
@@ -42,11 +43,12 @@ public class LostItemsActivity extends AppCompatActivity {
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
 
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private final ArrayList<LostItem> daList = new ArrayList<>();
+    private final ArrayList<Item> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
     //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
+    private Item item;
 
     //private final MapsActivity map = new MapsActivity();
     //Location
@@ -54,14 +56,14 @@ public class LostItemsActivity extends AppCompatActivity {
     /**
      * class of ItemAdapter that holds and display an array of LostItem
      */
-    private class ItemAdapter extends ArrayAdapter<LostItem> {
-        ItemAdapter(Context context, List<LostItem> list) {
+    private class ItemAdapter extends ArrayAdapter<Item> {
+        ItemAdapter(Context context, List<Item> list) {
             super(context,0,list);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LostItem lost = getItem(position);
+            item = getItem(position);
             View used;
             if (convertView == null) {
                 used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
@@ -72,7 +74,7 @@ public class LostItemsActivity extends AppCompatActivity {
             TextView itemName =  used.findViewById(R.id.item_name);
             ImageView itemImage = used.findViewById(R.id.item_picture);
 
-            itemName.setText(lost.getName());
+            itemName.setText(item.getName());
             itemImage.setImageResource(R.mipmap.default_image);
             return used;
         }
@@ -84,19 +86,11 @@ public class LostItemsActivity extends AppCompatActivity {
      */
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
-            LostItem item = new LostItem();
-            item.setName(dataSnapshot.getValue(LostItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
+            Item item = dataSnapshot.getValue(LostItem.class);
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
-            LostItem item = new LostItem();
-            item.setName(dataSnapshot.getValue(LostItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(LostItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(LostItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(LostItem.class).getUserName());
+            Item item = dataSnapshot.getValue(LostItem.class);
             daList.add(item);
             adapter.notifyDataSetChanged();
         }
@@ -124,14 +118,14 @@ public class LostItemsActivity extends AppCompatActivity {
                 final LostItem item = (LostItem) adapterView.getItemAtPosition(position);
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
                 alertDialog.setTitle("A lost item");
-                alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                    + "\n" + item.getUserName() + " is looking for this item!");
+                String itemName = item.toString();
+                String name = itemName.split("\n")[0];
+                alertDialog.setMessage(itemName);
                 alertDialog.setPositiveButton("Claim it!",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                foundRef.child(item.getKey()).setValue(item);
-                                ref.child(item.getKey()).removeValue();
+                                item.moveIt(foundRef, ref);
                                 daList.remove(position);
                                 adapter.notifyDataSetChanged();
                             }
@@ -168,22 +162,22 @@ public class LostItemsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 boolean foundItem = false;
                 for(int i=0; i < daList.size(); i++) {
-                    final LostItem item = daList.get(i);
+                    final Item item = daList.get(i);
                     final int position = i;
-                    if (item.getName().equals(query)) {
+                    String itemName = item.toString();
+                    String name = itemName.split("\n")[0];
+                    if (name.equals(query)) {
                         Log.d("LostItemsActivity", "found item");
                         foundItem = true;
 
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
                         alertDialog.setTitle("A lost item");
-                        alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                                + "\n" + item.getUserName() + " is looking for this item!");
+                        alertDialog.setMessage(itemName);
                         alertDialog.setPositiveButton("Claim it!",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        foundRef.child(item.getKey()).setValue(item);
-                                        ref.child(item.getKey()).removeValue();
+                                        item.moveIt(foundRef, ref);
                                         daList.remove(position);
                                         adapter.notifyDataSetChanged();
                                     }

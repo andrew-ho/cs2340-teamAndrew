@@ -27,6 +27,7 @@ import java.util.List;
 
 import cs2340teamandrew.wheresmystuff.R;
 import model.FoundItem;
+import model.Item;
 
 /**
  * activity that handles the found item page
@@ -37,8 +38,9 @@ public class FoundItemsActivity extends AppCompatActivity {
 
     //private FloatingActionButton itemAdder;
 
-    private final ArrayList<FoundItem> daList = new ArrayList<>();
+    private final ArrayList<Item> daList = new ArrayList<>();
     private ItemAdapter adapter;
+    private Item item;
 
     //private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -46,16 +48,16 @@ public class FoundItemsActivity extends AppCompatActivity {
     /**
      * class of ItemAdapter that holds and display an array of FoundItem
      */
-    class ItemAdapter extends ArrayAdapter<FoundItem> {
+    class ItemAdapter extends ArrayAdapter<Item> {
 
 
-        ItemAdapter(Context context, List<FoundItem> list) {
+        ItemAdapter(Context context, List<Item> list) {
             super(context,0,list);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            FoundItem found = getItem(position);
+            item = getItem(position);
             View used;
             if (convertView == null) {
                 used = LayoutInflater.from(getContext()).inflate(R.layout.lost_item, parent, false);
@@ -66,7 +68,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             TextView itemName = used.findViewById(R.id.item_name);
             ImageView itemImage = used.findViewById(R.id.item_picture);
 
-            itemName.setText(found.getName());
+            itemName.setText(item.getName());
             itemImage.setImageResource(R.mipmap.default_image);
             return used;
         }
@@ -78,19 +80,11 @@ public class FoundItemsActivity extends AppCompatActivity {
      */
     private void createList(DataSnapshot dataSnapshot) {
         if (daList.isEmpty()) {
-            FoundItem item = new FoundItem();
-            item.setName(dataSnapshot.getValue(FoundItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
+            Item item = dataSnapshot.getValue(FoundItem.class);
             daList.add(item);
             adapter.notifyDataSetChanged();
         } else {
-            FoundItem item = new FoundItem();
-            item.setName(dataSnapshot.getValue(FoundItem.class).getName());
-            item.setDescription(dataSnapshot.getValue(FoundItem.class).getDescription());
-            item.setKey(dataSnapshot.getValue(FoundItem.class).getKey());
-            item.setUserName(dataSnapshot.getValue(FoundItem.class).getUserName());
+            Item item = dataSnapshot.getValue(FoundItem.class);
             daList.add(item);
             adapter.notifyDataSetChanged();
         }
@@ -115,20 +109,10 @@ public class FoundItemsActivity extends AppCompatActivity {
         foundList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*// Get selected item text
-                LostItems item = (LostItems) adapterView.getItemAtPosition(i);
-                //ref.getKey();
-                // Display the selected item
-                Toast.makeText(getApplicationContext(),"Selected : " + item,Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), item.getKey(),Toast.LENGTH_SHORT).show();
-                ref.child(item.getKey()).removeValue();
-                daList.remove(i);
-                adapter.notifyDataSetChanged();*/
-                FoundItem item = (FoundItem) adapterView.getItemAtPosition(i);
+                item = (FoundItem) adapterView.getItemAtPosition(i);
                 AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                 alertDialog.setTitle("A found item");
-                alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                    + "\n" + item.getUserName() + " has found this item!");
+                alertDialog.setMessage(item.toString());
                 alertDialog.show();
             }
         });
@@ -158,15 +142,14 @@ public class FoundItemsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 boolean foundItem = false;
                 for(int i=0; i<daList.size(); i++) {
-                    final FoundItem item = daList.get(i);
-                    if (item.getName().equals(query)) {
+                    final Item itemSearch = daList.get(i);
+                    if (itemSearch.getName().equals(query)) {
                         Log.d("FoundItemActivity", "found item");
                         foundItem = true;
 
                         AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
                         alertDialog.setTitle("A found item");
-                        alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
-                                + "\n" + item.getUserName() + " has found this item!");
+                        alertDialog.setMessage(itemSearch.toString());
                         alertDialog.show();
 
                     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public abstract class Item {
 
-    final private static ArrayList<Item> masterItemList = new ArrayList<>();
+    private static final ArrayList<Item> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;

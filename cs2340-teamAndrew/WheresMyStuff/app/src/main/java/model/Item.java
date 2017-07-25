@@ -9,7 +9,8 @@ import android.widget.ImageView;
 
 public abstract class Item {
 
-    // --Commented out by Inspection (7/25/2017 1:47 PM):private static final ArrayList<Item> masterItemList = new ArrayList<>();
+    // --Commented out by Inspection (7/25/2017 1:47 PM):
+    // private static final ArrayList<Item> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;

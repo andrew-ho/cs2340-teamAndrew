@@ -3,6 +3,7 @@ package controller;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -59,8 +60,9 @@ public class LostItemsActivity extends AppCompatActivity {
             super(context,0,list);
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             LostItem lost = getItem(position);
             View used;
             if (convertView == null) {
@@ -111,7 +113,8 @@ public class LostItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lost_item);
 
         //get user data
-        //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
+        //ref = FirebaseDatabase.getInstance()
+        //  .getReference().child("Lostitems").child(user.getUid());
         ref = FirebaseDatabase.getInstance().getReference().child("Lostitems");
         foundRef = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
@@ -174,7 +177,8 @@ public class LostItemsActivity extends AppCompatActivity {
                         Log.d("LostItemsActivity", "found item");
                         foundItem = true;
 
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
+                        AlertDialog.Builder alertDialog
+                                = new AlertDialog.Builder(LostItemsActivity.this);
                         alertDialog.setTitle("A lost item");
                         alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
                                 + "\n" + item.getUserName() + " is looking for this item!");
@@ -198,7 +202,8 @@ public class LostItemsActivity extends AppCompatActivity {
                 }
 
                 if(!foundItem) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(LostItemsActivity.this);
+                    AlertDialog.Builder alertDialog
+                            = new AlertDialog.Builder(LostItemsActivity.this);
                     alertDialog.setTitle("Search results");
                     alertDialog.setMessage("Item not found!");
                     alertDialog.create();

@@ -34,9 +34,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-    private final DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+    private final DatabaseReference locat =
+            FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
-    private final DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
+    private final DatabaseReference foundPos =
+            FirebaseDatabase.getInstance().getReference().child("Founditems");
     private final Map<Marker, Item> hash = new HashMap<>();
 
 
@@ -70,14 +72,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     LocationItems locate = new LocationItems();
                     if (data.child("Location").exists()) {
-                        locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
-                        locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                        locate.setLatitude(
+                                data.child(
+                                        "Location").getValue(LocationItems.class).getLatitude());
+                        locate.setLongitude(
+                                data.child(
+                                        "Location").getValue(LocationItems.class).getLongitude());
                     }
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
                     LostItem item = new LostItem();
                     item.setName(data.getValue(LostItem.class).getName());
                     item.setDescription(data.getValue(LostItem.class).getDescription());
-                    Marker a = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    Marker a = mMap.addMarker(
+                            new MarkerOptions().position(
+                                    latLng).title(data.getValue(LostItem.class).getName()));
                     hash.put(a, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }
@@ -95,15 +103,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     LocationItems locate = new LocationItems();
                     if (data.child("Location").exists()) {
-                        locate.setLatitude(data.child("Location").getValue(LocationItems.class).getLatitude());
-                        locate.setLongitude(data.child("Location").getValue(LocationItems.class).getLongitude());
+                        locate.setLatitude(data.child(
+                                "Location").getValue(LocationItems.class).getLatitude());
+                        locate.setLongitude(data.child(
+                                "Location").getValue(LocationItems.class).getLongitude());
                     }
                     LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(data.getValue(LostItem.class).getName()));
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(
+                            data.getValue(LostItem.class).getName()));
                     FoundItem item = new FoundItem();
                     item.setName(data.getValue(FoundItem.class).getName());
                     item.setDescription(data.getValue(FoundItem.class).getDescription());
-                    //Toast.makeText(getApplicationContext(), data.getValue(FoundItem.class).getName(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), data.getValue(
+                    // FoundItem.class).getName(), Toast.LENGTH_LONG).show();
                     hash.put(marker, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }

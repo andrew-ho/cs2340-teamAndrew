@@ -2,6 +2,7 @@ package controller;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SearchView;
@@ -53,8 +54,9 @@ public class FoundItemsActivity extends AppCompatActivity {
             super(context,0,list);
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             FoundItem found = getItem(position);
             View used;
             if (convertView == null) {
@@ -66,6 +68,7 @@ public class FoundItemsActivity extends AppCompatActivity {
             TextView itemName = used.findViewById(R.id.item_name);
             ImageView itemImage = used.findViewById(R.id.item_picture);
 
+            assert found != null;
             itemName.setText(found.getName());
             itemImage.setImageResource(R.mipmap.default_image);
             return used;
@@ -107,7 +110,8 @@ public class FoundItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_found_items);
 
         //get user data
-        //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems").child(user.getUid());
+        //ref = FirebaseDatabase.getInstance().getReference().child("Lostitems")
+        //  .child(user.getUid());
         ref = FirebaseDatabase.getInstance().getReference().child("Founditems");
 
         //sets listview
@@ -119,7 +123,8 @@ public class FoundItemsActivity extends AppCompatActivity {
                 LostItems item = (LostItems) adapterView.getItemAtPosition(i);
                 //ref.getKey();
                 // Display the selected item
-                Toast.makeText(getApplicationContext(),"Selected : " + item,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                    "Selected : " + item,Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), item.getKey(),Toast.LENGTH_SHORT).show();
                 ref.child(item.getKey()).removeValue();
                 daList.remove(i);
@@ -163,7 +168,8 @@ public class FoundItemsActivity extends AppCompatActivity {
                         Log.d("FoundItemActivity", "found item");
                         foundItem = true;
 
-                        AlertDialog alertDialog = new AlertDialog.Builder(FoundItemsActivity.this).create();
+                        AlertDialog alertDialog =
+                                new AlertDialog.Builder(FoundItemsActivity.this).create();
                         alertDialog.setTitle("A found item");
                         alertDialog.setMessage(item.getName() + "\n" + item.getDescription()
                                 + "\n" + item.getUserName() + " has found this item!");
@@ -173,7 +179,8 @@ public class FoundItemsActivity extends AppCompatActivity {
                 }
 
                 if(!foundItem) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoundItemsActivity.this);
+                    AlertDialog.Builder alertDialog =
+                            new AlertDialog.Builder(FoundItemsActivity.this);
                     alertDialog.setTitle("Search results");
                     alertDialog.setMessage("Item not found!");
                     alertDialog.create();

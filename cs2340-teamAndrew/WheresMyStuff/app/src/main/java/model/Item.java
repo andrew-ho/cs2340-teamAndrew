@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public abstract class Item {
 
-    private static final ArrayList<Item> masterItemList = new ArrayList<>();
+    // --Commented out by Inspection (7/25/2017 1:47 PM):private static final ArrayList<Item> masterItemList = new ArrayList<>();
     private String description;
     private ImageView picture;
     private String name;
@@ -58,6 +58,7 @@ public abstract class Item {
         return name;
     }
 
+
     /**
      * gets picture
      * @return picture
@@ -65,6 +66,7 @@ public abstract class Item {
     public ImageView getPicture(){
         return picture;
     }
+
 
     /**
      * gets description
@@ -97,16 +99,18 @@ public abstract class Item {
 
     }
 
-    /**
-     * constructor chaining
-     * @param name name of item
-     * @param description description of item
-     * @param key key of item
-     * @param userName user who submitted the item
-     */
-    public Item(String name, String description, String key, String userName){
-        this(name, description, key, userName, null);
-    }
+// --Commented out by Inspection START (7/25/2017 1:46 PM):
+//    /**
+//     * constructor chaining
+//     * @param name name of item
+//     * @param description description of item
+//     * @param key key of item
+//     * @param userName user who submitted the item
+//     */
+//    public Item(String name, String description, String key, String userName){
+//        this(name, description, key, userName, null);
+//    }
+// --Commented out by Inspection STOP (7/25/2017 1:46 PM)
 
     /**
      * constructor chaining

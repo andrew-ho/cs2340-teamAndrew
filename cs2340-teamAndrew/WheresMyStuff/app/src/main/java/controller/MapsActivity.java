@@ -34,10 +34,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-    final private DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
+    private final DatabaseReference locat = FirebaseDatabase.getInstance().getReference().child("Lostitems");
 
-    final private DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
-    final private Map<Marker, Item> hash = new HashMap<>();
+    private final DatabaseReference foundPos = FirebaseDatabase.getInstance().getReference().child("Founditems");
+    private final Map<Marker, Item> hash = new HashMap<>();
 
 
     @Override
@@ -127,8 +127,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Check if a click count was set, then display the click count.
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         boolean found = item.getClass() == FoundItem.class;
-        builder1.setMessage(found ? ("Found item:\n" + item.getName() + "\n" + item.getDescription())
-                : ("Lost item:\n" + item.getName() + "\n" + item.getDescription()));
+        String msg;
+        if (found) {
+            msg = "Found item:\n";
+        } else {
+            msg = "Lost item:\n";
+        }
+        builder1.setMessage(msg + item.getName() + '\n' + item.getDescription() + '\n');
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "Positive button",

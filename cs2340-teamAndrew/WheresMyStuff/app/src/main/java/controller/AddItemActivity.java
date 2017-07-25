@@ -38,19 +38,20 @@ public class AddItemActivity extends AppCompatActivity {
     // UI references.
     private EditText mName;
     private EditText mDescription;
-
-
-    private LocationManager locationManager;
-
+    private Button mCancel;
+    private Button mAdd;
+    //private LocationManager locationManager;
+    private RadioButton mLost;
+    private RadioButton mFound;
     private boolean foundLost;
     private final DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    private Location location; // location
+    // --Commented out by Inspection (7/25/2017 1:46 PM):private Location location; // location
     private double latitude; // latitude
     private double longitude; // longitude
-
+    private LocationManager mLocationManager;
     /*private LocationManager lm
         = (LocationManager)getSystemService(getApplicationContext().LOCATION_SERVICE);
     private Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -83,11 +84,6 @@ public class AddItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Button mCancel;
-        Button mAdd;
-        RadioButton mLost;
-        RadioButton mFound;
-        LocationManager mLocationManager;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
         // Set up the login form.

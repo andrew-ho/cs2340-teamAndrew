@@ -9,12 +9,13 @@ import java.util.Collection;
  */
 
 public class User {
-    final private String username;
-    final private String password;
+    private final String username;
+    private final String password;
     protected String type;
   
-    final private static Collection<User> masterList = new ArrayList<>();
-    final private ArrayList<LostItem> myLostItems = new ArrayList<>();
+    private static final Collection<User> masterList = new ArrayList<>();
+    // --Commented out by Inspection (7/25/2017 1:48 PM):private final ArrayList<LostItem> myLostItems = new ArrayList<>();
+
 
     /**
      * constructor for user
@@ -27,6 +28,7 @@ public class User {
         this.type = "User";
         masterList.add(this);
     }
+
 
     public String toString() {
         return username + " " + password + " " + type;

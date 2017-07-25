@@ -29,14 +29,11 @@ public class User {
         masterList.add(this);
     }
 
-<<<<<<< HEAD
     /**
      * toString method for the user
      * @return string representation of the user's name, password, and type
      */
-=======
 
->>>>>>> origin/master
     public String toString() {
         return username + " " + password + " " + type;
     }

@@ -49,13 +49,13 @@ public class LostItemsActivity extends AppCompatActivity {
     //private ArrayList<LostItems> daList = new ArrayList<LostItems>();
     private Button back;
     //private ArrayList<String> showitems = new ArrayList<String>();
-    private ArrayList<LostItem> daList = new ArrayList<>();
+    final private ArrayList<LostItem> daList = new ArrayList<>();
     private ItemAdapter adapter;
     private DatabaseReference ref;
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    final private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference foundRef;
     private SearchView searchView;
-    private MapsActivity map = new MapsActivity();
+    final private MapsActivity map = new MapsActivity();
     //Location
     LatLng latLng;
     /**

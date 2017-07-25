@@ -57,7 +57,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    private User dummy = new User("test@test.com","password");
+    final private User dummy = new User("test@test.com","password");
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */

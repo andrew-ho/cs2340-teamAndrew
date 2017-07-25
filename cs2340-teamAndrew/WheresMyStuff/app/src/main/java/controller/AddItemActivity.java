@@ -46,9 +46,9 @@ public class AddItemActivity extends AppCompatActivity {
     private RadioButton mLost;
     private RadioButton mFound;
     private boolean foundLost;
-    final private DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference mMyRef = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth mAuth;
-    final private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private Location location; // location
     private double latitude; // latitude

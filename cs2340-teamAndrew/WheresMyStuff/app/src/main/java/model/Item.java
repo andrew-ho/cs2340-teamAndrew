@@ -61,15 +61,6 @@ public abstract class Item {
 
 
     /**
-     * gets picture
-     * @return picture
-     */
-    public ImageView getPicture(){
-        return picture;
-    }
-
-
-    /**
      * gets description
      * @return description
      */
@@ -132,15 +123,13 @@ public abstract class Item {
      * @param description description of item
      * @param key key of item
      * @param userName user who lost it
-     * @param image image of the item
      */
     public Item(String name, String description, String key,
-                     String userName, ImageView image) {
+                     String userName) {
         this.name = name;
         this.description = description;
         this.key = key;
         this.userName = userName;
-        this.picture = image;
         //masterItemList.add(this);
     }
 

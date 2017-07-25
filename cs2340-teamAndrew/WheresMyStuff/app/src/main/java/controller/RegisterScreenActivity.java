@@ -74,8 +74,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             //FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(getApplicationContext(), "Registered successfully",
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Registered successfully", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user
@@ -103,11 +102,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if ((id == R.id.login) || (id == EditorInfo.IME_NULL)) {
-                    //attemptLogin();
-                    return true;
-                }
-                return false;
+                return id == R.id.login || id == EditorInfo.IME_NULL;
             }
         });
         mAuth = FirebaseAuth.getInstance();
@@ -142,8 +137,8 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
                 mSelectAdmin = true;
             }
         });
-        //mLoginFormView = findViewById(R.id.login_form);
-        //mProgressView = findViewById(R.id.login_progress);
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
     }
 
     /**
@@ -175,8 +170,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         return new CursorLoader(this,
                 // Retrieve data rows for the device user's 'profile' contact.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY),
-                RegisterScreenActivity.ProfileQuery.PROJECTION,
+                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), RegisterScreenActivity.ProfileQuery.PROJECTION,
 
                 // Select only email addresses.
                 ContactsContract.Contacts.Data.MIMETYPE +

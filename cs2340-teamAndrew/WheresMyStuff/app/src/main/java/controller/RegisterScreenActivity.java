@@ -130,7 +130,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         mUserButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSelectUser = true;
+
             }
         });
 
@@ -220,7 +220,7 @@ public class RegisterScreenActivity extends AppCompatActivity implements LoaderC
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
+        //int IS_PRIMARY = 1;
     }
 
     @Override

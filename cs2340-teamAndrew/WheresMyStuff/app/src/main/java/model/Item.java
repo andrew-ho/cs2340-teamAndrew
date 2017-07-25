@@ -2,7 +2,6 @@ package model;
 
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 
 /**
  * Created by Andrew Tuttle.

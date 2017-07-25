@@ -124,6 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @param marker marker for map
      * @return boolean true or false for marker
      * */
+    @Override
     public boolean onMarkerClick(final Marker marker) {
         Item item = hash.get(marker);
         // Retrieve the data from the marker.
@@ -137,6 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         builder1.setPositiveButton(
                 "Positive button",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
@@ -144,6 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         builder1.setNegativeButton(
                 "Cancel",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

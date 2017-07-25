@@ -47,6 +47,10 @@
             android:name="controller.HomePageActivity"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="controller.MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,9 +63,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name="controller.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+
     </application>
 
 </manifest>

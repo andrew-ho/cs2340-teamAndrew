@@ -77,11 +77,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      * @return string
      */
     final static int ENCRYPT = 10000;
-    public static String  encryptPW(String password) {
-        for (int i = 0; i < ENCRYPT; i++) {
-        }
-        return null;
-    }
+
 
     /**
      * Method for handling encryption

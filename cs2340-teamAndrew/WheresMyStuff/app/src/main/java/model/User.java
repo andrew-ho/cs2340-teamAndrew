@@ -28,6 +28,10 @@ public class User {
         masterList.add(this);
     }
 
+    /**
+     * toString method for the user
+     * @return string representation of the user's name, password, and type
+     */
     public String toString() {
         return username + " " + password + " " + type;
     }

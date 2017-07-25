@@ -4,7 +4,7 @@ package model;
  * Created by Andrew Tuttle.
  */
 
-public class Admin extends User {
+class Admin extends User {
 
     /**
      * Constructor for Admins

@@ -1,7 +1,5 @@
 package model;
 
-import android.widget.ImageView;
-
 
 /**
  * Created by Andrew Tuttle.
@@ -12,9 +10,7 @@ public abstract class Item {
     // --Commented out by Inspection (7/25/2017 1:47 PM):
     // private static final ArrayList<Item> masterItemList = new ArrayList<>();
     private String description;
-    private ImageView picture;
     private String name;
-    private ImageView defaultImage;
     private String key;
     private String userName;
 
@@ -58,16 +54,6 @@ public abstract class Item {
         return name;
     }
 
-
-    /**
-     * gets picture
-     * @return picture
-     */
-    public ImageView getPicture(){
-        return picture;
-    }
-
-
     /**
      * gets description
      * @return description
@@ -95,7 +81,7 @@ public abstract class Item {
     /**
      * empty constructor required for firebase
      */
-    public Item(){
+    Item(){
 
     }
 
@@ -118,15 +104,13 @@ public abstract class Item {
      * @param description description of item
      * @param key key of item
      * @param userName user who lost it
-     * @param image image of the item
      */
-    public Item(String name, String description, String key,
-                     String userName, ImageView image) {
+    Item(String name, String description, String key,
+         String userName) {
         this.name = name;
         this.description = description;
         this.key = key;
         this.userName = userName;
-        this.picture = image;
         //masterItemList.add(this);
     }
 

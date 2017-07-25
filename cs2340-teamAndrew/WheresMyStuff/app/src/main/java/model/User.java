@@ -6,10 +6,10 @@ package model;
  * Created by Andrew Tuttle.
  */
 
-public class User {
+class User {
     private final String username;
     private final String password;
-    protected String type;
+    String type;
   
     //private static final Collection<User> masterList = new ArrayList<>();
     // --Commented out by Inspection (7/25/2017 1:48 PM):
@@ -21,7 +21,7 @@ public class User {
      * @param username username of user
      * @param password password of user
      */
-    public User(String username, String password) {
+    User(String username, String password) {
         this.password = password;
         this.username = username;
         this.type = "User";

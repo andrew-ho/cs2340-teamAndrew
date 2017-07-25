@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -40,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final DatabaseReference foundPos =
             FirebaseDatabase.getInstance().getReference().child("Founditems");
     private final Map<Marker, Item> hash = new HashMap<>();
+    LocationItems locate = new LocationItems();
 
 
     @Override
@@ -50,6 +53,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @SuppressWarnings("ChainedMethodCall") SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+
+
+    private LocationItems getLocation(DataSnapshot dataSnapshot) {
+        locate = dataSnapshot.child("Location").getValue(LocationItems.class);
+        //locate.setLatitude(dataSnapshot.child("Location").getValue(LocationItems.class).getLatitude());
+        //locate.setLongitude(dataSnapshot.child("Location").getValue(LocationItems.class).getLongitude());
+        return locate;
+    }
+
+    private LatLng setLatLng(LocationItems locate) {
+        LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+        return latLng;
     }
 
 
@@ -70,27 +87,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    LocationItems locate = new LocationItems();
-                    //noinspection ChainedMethodCall
-                    if (data.child("Location").exists()) {
-                        //noinspection ChainedMethodCall,ChainedMethodCall
-                        locate.setLatitude(
-                                data.child(
-                                        "Location").getValue(LocationItems.class).getLatitude());
-                        //noinspection ChainedMethodCall,ChainedMethodCall
-                        locate.setLongitude(
-                                data.child(
-                                        "Location").getValue(LocationItems.class).getLongitude());
-                    }
-                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-                    LostItem item = new LostItem();
-                    //noinspection ChainedMethodCall
-                    item.setName(data.getValue(LostItem.class).getName());
-                    //noinspection ChainedMethodCall
-                    item.setDescription(data.getValue(LostItem.class).getDescription());
+                    locate = getLocation(data);
+                    LatLng latLng = setLatLng(locate);
+                    LostItem item = data.getValue(LostItem.class);
                     @SuppressWarnings("ChainedMethodCall") Marker a = mMap.addMarker(
                             new MarkerOptions().position(
-                                    latLng).title(data.getValue(LostItem.class).getName()));
+                                    latLng).title(item.getName()));
                     hash.put(a, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }
@@ -106,26 +108,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    LocationItems locate = new LocationItems();
-                    //noinspection ChainedMethodCall
-                    if (data.child("Location").exists()) {
-                        //noinspection ChainedMethodCall,ChainedMethodCall
-                        locate.setLatitude(data.child(
-                                "Location").getValue(LocationItems.class).getLatitude());
-                        //noinspection ChainedMethodCall,ChainedMethodCall
-                        locate.setLongitude(data.child(
-                                "Location").getValue(LocationItems.class).getLongitude());
-                    }
-                    LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
+                    locate = getLocation(data);
+                    LatLng latLng = setLatLng(locate);
                     @SuppressWarnings("ChainedMethodCall") Marker marker = mMap.addMarker(new MarkerOptions().position(latLng).title(
                             data.getValue(LostItem.class).getName()));
-                    FoundItem item = new FoundItem();
-                    //noinspection ChainedMethodCall
-                    item.setName(data.getValue(FoundItem.class).getName());
-                    //noinspection ChainedMethodCall
-                    item.setDescription(data.getValue(FoundItem.class).getDescription());
-                    //Toast.makeText(getApplicationContext(), data.getValue(
-                    // FoundItem.class).getName(), Toast.LENGTH_LONG).show();
+                    FoundItem item = data.getValue(FoundItem.class);
                     hash.put(marker, item);
                     mMap.setOnMarkerClickListener(MapsActivity.this);
                 }

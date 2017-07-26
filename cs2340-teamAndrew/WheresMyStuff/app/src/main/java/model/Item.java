@@ -91,6 +91,11 @@ public abstract class Item {
 
     }
 
+    /**
+     * Moves item to founditems database
+     * @param foundRef reference for founditems database
+     * @param ref reference for lostitems database
+     */
     public void moveIt(DatabaseReference foundRef, DatabaseReference ref) {
         foundRef.child(this.getKey()).setValue(this);
         ref.child(this.getKey()).removeValue();

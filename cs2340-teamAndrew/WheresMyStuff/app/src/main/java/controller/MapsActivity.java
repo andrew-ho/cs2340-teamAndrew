@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final DatabaseReference foundPos =
             FirebaseDatabase.getInstance().getReference().child("Founditems");
     private final Map<Marker, Item> hash = new HashMap<>();
-    LocationItems locate = new LocationItems();
+    private LocationItems locate = new LocationItems();
 
 
     @Override
@@ -58,15 +57,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private LocationItems getLocation(DataSnapshot dataSnapshot) {
-        locate = dataSnapshot.child("Location").getValue(LocationItems.class);
+        DataSnapshot c = dataSnapshot.child("Location");
+        if (c.exists()) {
+            locate = c.getValue(LocationItems.class);
+        }
         //locate.setLatitude(dataSnapshot.child("Location").getValue(LocationItems.class).getLatitude());
         //locate.setLongitude(dataSnapshot.child("Location").getValue(LocationItems.class).getLongitude());
         return locate;
     }
 
     private LatLng setLatLng(LocationItems locate) {
-        LatLng latLng = new LatLng(locate.getLatitude(), locate.getLongitude());
-        return latLng;
+        return new LatLng(locate.getLatitude(), locate.getLongitude());
     }
 
 

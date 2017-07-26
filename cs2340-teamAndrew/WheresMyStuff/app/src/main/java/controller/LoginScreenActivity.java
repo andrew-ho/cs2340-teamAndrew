@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -117,6 +118,19 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
+        TextView textView = findViewById(R.id.forgot_password);
+        textView.setTextColor(Color.BLUE);
+
+        textView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "Shit", Toast.LENGTH_LONG).show();
+            }
+        });
+        //textView.setMovementMethod();
+
         Button mExitButton = findViewById(R.id.ExitApp);
         mExitButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -202,6 +216,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
         Intent intent = new Intent(getApplicationContext(), RegisterScreenActivity.class);
         startActivity(intent);
     }
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.

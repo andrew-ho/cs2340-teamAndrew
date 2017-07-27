@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,6 +41,7 @@ import java.util.List;
 import cs2340teamandrew.wheresmystuff.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import android.os.CountDownTimer;
 
 /**
  * A login screen that offers login via email/password.
@@ -63,6 +66,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
     private EditText mPasswordView;
 
     private FirebaseAuth mAuth;
+    private int signInFailed;
+    private Button mEmailSignInButton;
 
 
     /**
@@ -72,6 +77,7 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
      */
     private void signIn(String email, String password) {
         //noinspection ChainedMethodCall
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,11 +90,40 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
 
                         } else {
                             // If sign in fails, display a message to the user.
-
+                            signInFailed++;
                             //noinspection ChainedMethodCall
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
+                            if(signInFailed >= 3) {
+                                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginScreenActivity.this);
+                                alertDialog.setTitle("Wrong email or password");
+                                alertDialog.setMessage("You have incorrectly input your password 3 times. Please try again in 30 seconds");
+                                alertDialog.setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+                                alertDialog.show();
+                                final TextView mTextView = findViewById(R.id.try_again_timer);
+
+                                new CountDownTimer(30000, 1000) {
+
+                                    public void onTick(long millisUntilFinished) {
+                                        mEmailSignInButton.setClickable(false);
+                                        mTextView.setText("Try again in " + millisUntilFinished / 1000 + " seconds.");
+                                    }
+
+                                    public void onFinish() {
+                                        mEmailSignInButton.setClickable(true);
+                                        mTextView.setText("Try again");
+                                    }
+                                }.start();
+
+                                signInFailed = 0;
+                            }
                         }
 
                         // ...
@@ -147,7 +182,8 @@ public class LoginScreenActivity extends AppCompatActivity implements LoaderCall
             }
         });
 
-        Button mEmailSignInButton =  findViewById(R.id.email_sign_in_button);
+        //Button mEmailSignInButton =  findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton =  findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
